@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react'
 import axios from 'axios'
+import {FaSearch} from "react-icons/fa";
 
 import './App.css'
 import Product from './components/Product'
@@ -35,14 +36,31 @@ const App = () => {
     setSearch(event.target.value)
   }
 
+  const svg = {
+    position: 'absolute',
+    top: '50%',
+    left: '0%',
+    transform: 'translate(100%, -50%)',
+    color: 'red'
+  }
 
   return (
     <div className="App">
       <h1 style={{textAlign: 'center'}}>Shopping Spree</h1>
-      {/* <h1>Shopping Spree</h1> */}
-      <form className="search-form" onSubmit={getSearch}>
-        <input className="search-bar" type="text" value={search} onChange={handleSearch}/>
-        <button className="search-button" type="submit">Search</button> 
+
+      {/* <form className="search-form" onSubmit={getSearch}>
+        <div className="search-inputs">
+          <input className="search-bar" type="text" value={search} onChange={handleSearch}/>
+          <div className="search-icon">
+          <FaSearch />
+          </div>
+        </div>
+      </form> */}
+      <form className="search-form">
+        <div>
+          <FaSearch />
+          <input type="text"/>
+        </div>
       </form>
       
       <h2>Products</h2>
