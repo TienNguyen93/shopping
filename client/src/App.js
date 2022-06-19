@@ -36,17 +36,15 @@ const App = () => {
     setSearch(event.target.value)
   }
 
-  const svg = {
-    position: 'absolute',
-    top: '50%',
-    left: '0%',
-    transform: 'translate(100%, -50%)',
-    color: 'red'
-  }
-
   return (
     <div className="App">
-      <h1 style={{textAlign: 'center'}}>Shopping Spree</h1>
+      <div className="header-container">
+            <h1 style={{padding: '10px'}}>Shopping Spree</h1>
+            <form style={{display: 'inline-block', marginLeft: 'auto', marginRight: 'auto'}}>
+                <input type="text"/>
+            </form>
+      </div>
+      
 
       {/* <form className="search-form" onSubmit={getSearch}>
         <div className="search-inputs">
@@ -56,14 +54,16 @@ const App = () => {
           </div>
         </div>
       </form> */}
-      <form className="search-form">
+      {/* <form className="search-form">
         <div>
           <FaSearch />
           <input type="text"/>
         </div>
-      </form>
+      </form> */}
+      {/* <div>
+        <h2>Products</h2>
+      </div> */}
       
-      <h2>Products</h2>
       {/* <div className="products">
         {products.map(product => (
           <Product key={product.food.label} product={product.food} />
