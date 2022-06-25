@@ -1,7 +1,7 @@
 .App {
     display: flex;
     flex-direction: column;
-    font-family: 'Monsterrat', sans-serif;
+    font-family: 'Trebuchet MS', sans-serif;
 }
 
 .header-container {
@@ -47,20 +47,28 @@
     padding: 30px;
 }
 
+
 .products {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    grid-gap: 5rem;
+    padding: 30px;
 }
+
+.card {
+    vertical-align: top;
+    text-align: left;
+    overflow: hidden;
+    min-height: 100%;
+    display: inline-block;
+    white-space: normal;
+    letter-spacing: normal;
+    list-style-type: none;
+}
+
 
 
 /*
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
-    grid-gap: 3rem
-}
-
 
 .card {
     img {

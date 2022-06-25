@@ -10,20 +10,14 @@ const App = () => {
   const [search, setSearch] = useState('')
   const [query, setQuery] = useState('chicken')
 
-  const getProducts = async () => {
-    const response = await 
-      axios
-        .get(
-          `http://localhost:5000/foods/${query}`
-        )
-        console.log(response.data)
-        setProducts(response.data)
-  }
-
   useEffect(() => {
-    getProducts()
-  }, [query])
-
+    axios
+      .get(`http://localhost:3001/products`)
+      .then(response => {
+        console.log('fake api here', response.data)
+        setProducts(response.data)
+      })
+  }, [])
 
   const getSearch = (event) => {
     event.preventDefault()
@@ -48,15 +42,17 @@ const App = () => {
             </form>
       </div>
 
+
       <div className="body">
         <h2>Products</h2>
+        <div className="products">
+          {products.map(product => (
+            <Product key={product.id} product={product} />
+          ))}
+        </div>
       </div>
       
-      <div className="products">
-        {products.map(product => (
-          <Product key={product.food.label} product={product.food} />
-        ))}
-      </div>
+      
       
     </div>
     
@@ -64,3 +60,41 @@ const App = () => {
 }
 
 export default App;
+
+
+/*
+const getProducts = async () => {
+    const response = await 
+      axios
+        .get(
+          `http://localhost:5000/foods/${query}`
+        )
+        console.log(response.data)
+        setProducts(response.data)
+  }
+
+  useEffect(() => {
+    getProducts()
+  }, [query])
+
+  {
+        "id": 2,
+        "content": "Browser can execute only JavaScript",
+        "date": "2022-1-17T18:39:34.091Z",
+        "important": false
+      },
+      {
+        "id": 3,
+        "content": "GET and POST are the most important methods of HTTP protocol",
+        "date": "2022-1-17T19:20:14.298Z",
+        "important": true
+      },
+      {
+        "id": 4,
+        "content": "GET and POST are the most important methods of HTTP protocol",
+        "date": "2022-1-17T19:20:14.298Z",
+        "important": true
+      }
+
+*/
+
