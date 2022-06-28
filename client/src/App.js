@@ -23,17 +23,10 @@ const App = () => {
   const handleSearch = (event) => {
     console.log(event.target.value)
     setSearch(event.target.value)
-    // const filtered = allProducts.filter(product => 
-    //   product.title.toLowerCase().includes(search.toLowerCase()))
-    // setProducts(filtered)
+  }
 
-    // if (search !== '') {
-    //   const filtered = allProducts.filter(product => 
-    //     product.title.toLowerCase().includes(search.toLowerCase()))
-    //   setProducts(filtered)
-    // } 
-    // setProducts(allProducts)
-    
+  const searchFunction = (products) => {
+    return products.filter(product => product.title.toLowerCase().includes(search))
   }
 
 
@@ -59,8 +52,7 @@ const App = () => {
       <div className="body">
         <h2>Products</h2>
         <div className="products">
-          
-          {/* <Products products={products} allProducts={allProducts}/> */}
+          <Products products={searchFunction(allProducts)}/>
         </div>
       </div>
     </div>
