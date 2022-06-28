@@ -3,57 +3,66 @@ import axios from 'axios'
 import {FaSearch} from "react-icons/fa";
 
 import './App.css'
-import Product from './components/Product'
+import Products from './components/Products';
 
 const App = () => {
   const [products, setProducts] = useState([])
-  const [search, setSearch] = useState('')
-  const [query, setQuery] = useState('chicken')
+  const [allProducts, setAllProducts] = useState([])
+  const [search, setSearch] = useState("")
+
 
   useEffect(() => {
     axios
       .get(`http://localhost:3001/products`)
       .then(response => {
         console.log('fake api here', response.data)
-        setProducts(response.data)
+        setAllProducts(response.data)
       })
   }, [])
-
-  const getSearch = (event) => {
-    event.preventDefault()
-    setQuery(search)
-    setSearch('')
-  }
-
+  
   const handleSearch = (event) => {
     console.log(event.target.value)
     setSearch(event.target.value)
+    // const filtered = allProducts.filter(product => 
+    //   product.title.toLowerCase().includes(search.toLowerCase()))
+    // setProducts(filtered)
+
+    // if (search !== '') {
+    //   const filtered = allProducts.filter(product => 
+    //     product.title.toLowerCase().includes(search.toLowerCase()))
+    //   setProducts(filtered)
+    // } 
+    // setProducts(allProducts)
+    
   }
+
 
   return (
     <div className="App">
       <div className="header-container">
             <h1 style={{padding: '10px'}}>Shopping Spree</h1>
-            <form className="search-form" onSubmit={getSearch}>
-                <div>
-                  <FaSearch />
-                  <input type="text" value={search} onChange={handleSearch}/>
-                </div>
-            </form>
+            <div>
+                <input value={search} onChange={handleSearch}/>
+            </div>
+            {/* <form className="search-form" onSubmit={handleSubmit}>
+              <div>
+                <FaSearch />
+                <input  
+                  type="text" 
+                  value={search} 
+                  onChange={handleSearch}/>
+              </div>
+            </form> */}
       </div>
 
 
       <div className="body">
         <h2>Products</h2>
         <div className="products">
-          {products.map(product => (
-            <Product key={product.id} product={product} />
-          ))}
+          
+          {/* <Products products={products} allProducts={allProducts}/> */}
         </div>
       </div>
-      
-      
-      
     </div>
     
   )
@@ -95,6 +104,5 @@ const getProducts = async () => {
         "date": "2022-1-17T19:20:14.298Z",
         "important": true
       }
-
 */
 

@@ -1,21 +1,28 @@
 import React from "react";
 import Product from "./Product";
 
-const Products = ({products}) => {
+const Products = ({products, allProducts}) => {
+    // if (products.length !== 0) {
+    //     return (
+    //         <>
+    //             {products.map(product => 
+    //                 <Product key={product.id} product={product}/>)}
+    //         </>
+    //     )
+    // }
+    // else {
+    //     return (
+    //         <>
+    //             {allProducts.map(product => 
+    //                 <Product key={product.id} product={product}/>)}
+    //         </>
+    //     )
+    // }
     return (
-        <ul>
-            {/* {products.map(product => (
-                <Product 
-                key={product.foodId}
-                product={product}/>
-                )}
-            ) */}
-            {products.map(product => (
-                <li>
-                    <Product key={product.label} product={product} />
-                </li>
-            ))}
-        </ul>
+        <>
+            {products.map(product => 
+                <Product key={product.id} product={product}/>)}
+        </>
     )
 }
 

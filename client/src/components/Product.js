@@ -35,9 +35,9 @@ const Product = ({product}) => {
                 <ul style={{listStyleType: 'none'}}>
                     <li>{product.title}</li>
                     <div>
-                    {[...Array(5)].map((star) => {        
+                    {[...Array(5)].map((star, index) => {        
                         return (           
-                        <FaStar style={{marginRight: '5px'}} color="red" size={12}/>   
+                        <FaStar key={index} style={{marginRight: '5px'}} color="red" size={12}/>   
                         );
                     })}
                     </div>
