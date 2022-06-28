@@ -34,18 +34,10 @@ const App = () => {
     <div className="App">
       <div className="header-container">
             <h1 style={{padding: '10px'}}>Shopping Spree</h1>
-            <div>
-                <input value={search} onChange={handleSearch}/>
+            <div className="search-form">
+              <FaSearch />
+              <input value={search} onChange={handleSearch}/>
             </div>
-            {/* <form className="search-form" onSubmit={handleSubmit}>
-              <div>
-                <FaSearch />
-                <input  
-                  type="text" 
-                  value={search} 
-                  onChange={handleSearch}/>
-              </div>
-            </form> */}
       </div>
 
 
