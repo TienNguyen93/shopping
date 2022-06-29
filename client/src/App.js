@@ -43,9 +43,9 @@ const App = () => {
 
       <div className="body">
         <h2>Products</h2>
-        <div className="products">
+        <section className="products">
           <Products products={searchFunction(allProducts)}/>
-        </div>
+        </section>
       </div>
     </div>
     
