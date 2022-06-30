@@ -4,6 +4,8 @@ import {FaSearch} from "react-icons/fa";
 
 import './App.css'
 import Products from './components/Products';
+import Search from './components/Search';
+import FilterPanel from './components/FilterPanel';
 
 const App = () => {
   const [products, setProducts] = useState([])
@@ -36,16 +38,24 @@ const App = () => {
             <h1 style={{padding: '10px'}}>Shopping Spree</h1>
             <div className="search-form">
               <FaSearch />
-              <input value={search} onChange={handleSearch}/>
+              <Search value={search} onChange={handleSearch}/>
             </div>
       </div>
 
 
       <div className="body">
-        <h2>Products</h2>
-        <section className="products">
-          <Products products={searchFunction(allProducts)}/>
-        </section>
+        <div style={{display: 'flex', flex: '1'}}>
+          <div style={{backgroundColor: 'orange', flexBasis: '280px', borderRight: 'solid 2px'}}>
+            <h2>Category</h2>
+            <FilterPanel />
+          </div>
+          <div style={{flex: '1'}}>
+            <h2>Products</h2>
+            <section className="products">
+              <Products products={searchFunction(allProducts)}/>
+            </section>
+          </div>
+        </div>
       </div>
     </div>
     
