@@ -1,10 +1,20 @@
 import React from "react";
 
-const FilterPanel = () => {
+const FilterPanel = ({categories, onChange}) => {
     return (
-        <div>
-            filter panel here
-        </div>
+        <>
+            {categories.map(category => 
+                <ul style={{listStyleType: 'none'}} key={category.id}>
+                    <li>
+                        <input 
+                            type="checkbox" 
+                            checked={category.checked}
+                            onChange={() => onChange(category.id)}
+                        />
+                        <span>{category.label}</span>
+                    </li>
+                </ul>)}
+        </>
     )
 }
 

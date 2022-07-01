@@ -11,7 +11,33 @@ const App = () => {
   const [products, setProducts] = useState([])
   const [allProducts, setAllProducts] = useState([])
   const [search, setSearch] = useState("")
-
+  const [categories, setCategories] = useState([
+    {
+      id: 1, 
+      checked: false,
+      label: 'Dumbbell'
+    },
+    {
+      id: 2, 
+      checked: false,
+      label: 'Electronics'
+    },
+    {
+      id: 3, 
+      checked: false,
+      label: 'Kitchen Dining'
+    },
+    {
+      id: 4, 
+      checked: false,
+      label: 'Pots and Pans Set'
+    },
+    {
+      id: 5, 
+      checked: false,
+      label: 'Tea Kettle'
+    },
+  ])
 
   useEffect(() => {
     axios
@@ -21,14 +47,24 @@ const App = () => {
         setAllProducts(response.data)
       })
   }, [])
+
+  const searchFunction = (products) => {
+    return products.filter(product => product.title.toLowerCase().includes(search))
+  }
   
   const handleSearch = (event) => {
     console.log(event.target.value)
     setSearch(event.target.value)
   }
 
-  const searchFunction = (products) => {
-    return products.filter(product => product.title.toLowerCase().includes(search))
+  const handleChecked = (id) => {
+    console.log('check is clicked') 
+    const initialCat = categories
+    const changeCat = initialCat.map(category => 
+      category.id === id ? {...category, checked: !category.checked} : category)
+    
+    setCategories(changeCat)
+    console.log(changeCat)
   }
 
 
@@ -47,7 +83,7 @@ const App = () => {
         <div style={{display: 'flex', flex: '1'}}>
           <div style={{backgroundColor: 'orange', flexBasis: '280px', borderRight: 'solid 2px'}}>
             <h2>Category</h2>
-            <FilterPanel />
+            <FilterPanel categories={categories} onChange={handleChecked}/>
           </div>
           <div style={{flex: '1'}}>
             <h2>Products</h2>
@@ -57,6 +93,7 @@ const App = () => {
           </div>
         </div>
       </div>
+
     </div>
     
   )
