@@ -11,6 +11,8 @@ const App = () => {
   const [products, setProducts] = useState([])
   const [allProducts, setAllProducts] = useState([])
   const [search, setSearch] = useState("")
+  const [resultFound, setResultFound] = useState(false)
+
   const [categories, setCategories] = useState([
     {
       id: 1, 
@@ -48,9 +50,9 @@ const App = () => {
       })
   }, [])
 
-  const searchFunction = (products) => {
-    return products.filter(product => product.title.toLowerCase().includes(search))
-  }
+  // const searchFunction = (products) => {
+  //   return products.filter(product => product.title.toLowerCase().includes(search))
+  // }
   
   const handleSearch = (event) => {
     console.log(event.target.value)
@@ -61,12 +63,38 @@ const App = () => {
     console.log('check is clicked') 
     const initialCat = categories
     const changeCat = initialCat.map(category => 
-      category.id === id ? {...category, checked: !category.checked} : category)
+      category.id === id ? {...category, checked: !category.checked} : category
+    )
     
     setCategories(changeCat)
-    console.log(changeCat)
+    console.log('handlecheck here', changeCat)
   }
 
+  const applyFilter = (products) => {
+    const updatedList = allProducts
+
+    console.log('updated list', updatedList)
+
+    
+    return updatedList
+    // setProducts(updatedList)
+    // const categoryChecked = categories
+    //   .filter(category => category.checked)
+    //   .map(category => category.label.toLowerCase())
+
+    // console.log('category checked', categoryChecked) 
+
+    // if (categoryChecked.length) {
+    //   updatedList = updatedList.filter(item => categoryChecked.includes(item.category))
+    // }
+    // setProducts(updatedList)
+
+    // !updatedList.length ? setResultFound(false) : setResultFound(true)
+  }
+
+  // useEffect(() => {
+  //   applyFilter()
+  // }, [categories] )
 
   return (
     <div className="App">
@@ -88,7 +116,8 @@ const App = () => {
           <div style={{flex: '1'}}>
             <h2>Products</h2>
             <section className="products">
-              <Products products={searchFunction(allProducts)}/>
+              {/* <Products products={searchFunction(allProducts)}/> */}
+              <Products products={applyFilter(allProducts)}/>
             </section>
           </div>
         </div>
