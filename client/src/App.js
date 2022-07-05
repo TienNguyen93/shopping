@@ -11,8 +11,6 @@ const App = () => {
   const [products, setProducts] = useState([])
   const [allProducts, setAllProducts] = useState([])
   const [search, setSearch] = useState("")
-  const [resultFound, setResultFound] = useState(false)
-
   const [categories, setCategories] = useState([
     {
       id: 1, 
@@ -45,14 +43,9 @@ const App = () => {
     axios
       .get(`http://localhost:3001/products`)
       .then(response => {
-        console.log('fake api here', response.data)
         setAllProducts(response.data)
       })
   }, [])
-
-  // const searchFunction = (products) => {
-  //   return products.filter(product => product.title.toLowerCase().includes(search))
-  // }
   
   const handleSearch = (event) => {
     console.log(event.target.value)
@@ -67,41 +60,36 @@ const App = () => {
     )
     
     setCategories(changeCat)
-    console.log('handlecheck here', changeCat)
   }
 
-  const applyFilter = (products) => {
-    const updatedList = allProducts
+  useEffect(() => {
+    let result = allProducts
 
-    console.log('updated list', updatedList)
+    // Search function
+    if (search) {
+      result = result.filter(product => product.title.toLowerCase().includes(search))
+    } 
 
-    
-    return updatedList
-    // setProducts(updatedList)
-    // const categoryChecked = categories
-    //   .filter(category => category.checked)
-    //   .map(category => category.label.toLowerCase())
+    // Category filter
+    const categoryChecked = categories
+      .filter(category => category.checked)
+      .map(category => category.label.toLowerCase())
 
-    // console.log('category checked', categoryChecked) 
+    if (categoryChecked.length) {
+      result = result
+        .filter(item => categoryChecked.includes(item.category.toLowerCase()))
+    }
 
-    // if (categoryChecked.length) {
-    //   updatedList = updatedList.filter(item => categoryChecked.includes(item.category))
-    // }
-    // setProducts(updatedList)
+    setProducts(result)
 
-    // !updatedList.length ? setResultFound(false) : setResultFound(true)
-  }
-
-  // useEffect(() => {
-  //   applyFilter()
-  // }, [categories] )
+  }, [allProducts, search, categories])
 
   return (
     <div className="App">
       <div className="header-container">
             <h1 style={{padding: '10px'}}>Shopping Spree</h1>
+
             <div className="search-form">
-              <FaSearch />
               <Search value={search} onChange={handleSearch}/>
             </div>
       </div>
@@ -109,15 +97,15 @@ const App = () => {
 
       <div className="body">
         <div style={{display: 'flex', flex: '1'}}>
-          <div style={{backgroundColor: 'orange', flexBasis: '280px', borderRight: 'solid 2px'}}>
+          <div style={{flexBasis: '280px'}}>
             <h2>Category</h2>
             <FilterPanel categories={categories} onChange={handleChecked}/>
+
           </div>
           <div style={{flex: '1'}}>
             <h2>Products</h2>
             <section className="products">
-              {/* <Products products={searchFunction(allProducts)}/> */}
-              <Products products={applyFilter(allProducts)}/>
+              <Products products={products}/>
             </section>
           </div>
         </div>
@@ -130,39 +118,4 @@ const App = () => {
 
 export default App;
 
-
-/*
-const getProducts = async () => {
-    const response = await 
-      axios
-        .get(
-          `http://localhost:5000/foods/${query}`
-        )
-        console.log(response.data)
-        setProducts(response.data)
-  }
-
-  useEffect(() => {
-    getProducts()
-  }, [query])
-
-  {
-        "id": 2,
-        "content": "Browser can execute only JavaScript",
-        "date": "2022-1-17T18:39:34.091Z",
-        "important": false
-      },
-      {
-        "id": 3,
-        "content": "GET and POST are the most important methods of HTTP protocol",
-        "date": "2022-1-17T19:20:14.298Z",
-        "important": true
-      },
-      {
-        "id": 4,
-        "content": "GET and POST are the most important methods of HTTP protocol",
-        "date": "2022-1-17T19:20:14.298Z",
-        "important": true
-      }
-*/
 
