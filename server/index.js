@@ -1,13 +1,14 @@
 const express = require('express')
 const cors = require('cors')
-const axios = require('axios')
-const { response } = require('express')
-const dotenv = require('dotenv').config()
+// const axios = require('axios')
+// const { response } = require('express')
+// const dotenv = require('dotenv').config()
 
 const app = express()
 const PORT = process.env.PORT || 5000
 
 app.use(cors())
+app.use(express.json())
 
 let products = [
     {
@@ -166,6 +167,7 @@ const generateId = () => {
   const maxId = products.length > 0 
     ? Math.max(...products.map(n => n.id))
     : 0
+
   return maxId + 1
 }
 
@@ -174,24 +176,30 @@ app.post('/api/products', (request, response) => {
 
   if (!body.title) {
     return response.status(400).json({
-      error: `content missing`
+      error: `title missing`
     })
   }
 
   const product = {
-    id: generateId(),
     title: body.title,
-    // image: body.image,
-    // price: body.price,
-    // category: body.category
+    image: body.image,
+    price: body.price,
+    category: body.category,
+    id: generateId()
   }
 
   products = products.concat(product)
+
   response.json(product)
+  
 })
+
+
+// app.put('/api/products/:id', (request, response) => {
+//   const id = Number(request.params.id)
+// })
+
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
 })
-
-// || !body.image, || !body.category
