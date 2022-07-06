@@ -1,49 +1,32 @@
 import {useState, useEffect} from 'react'
 import axios from 'axios'
 import {FaSearch} from "react-icons/fa";
-
 import './App.css'
+
 import Products from './components/Products';
 import Search from './components/Search';
 import FilterPanel from './components/FilterPanel';
+import Notification from './components/Notification';
+import productService from './service/service';
 
 const App = () => {
   const [products, setProducts] = useState([])
   const [allProducts, setAllProducts] = useState([])
   const [search, setSearch] = useState("")
   const [categories, setCategories] = useState([
-    {
-      id: 1, 
-      checked: false,
-      label: 'Dumbbell'
-    },
-    {
-      id: 2, 
-      checked: false,
-      label: 'Electronics'
-    },
-    {
-      id: 3, 
-      checked: false,
-      label: 'Kitchen Dining'
-    },
-    {
-      id: 4, 
-      checked: false,
-      label: 'Pots and Pans Set'
-    },
-    {
-      id: 5, 
-      checked: false,
-      label: 'Tea Kettle'
-    },
+    { id: 1, checked: false, label: 'Dumbbell' },
+    { id: 2, checked: false, label: 'Electronics' },
+    { id: 3, checked: false, label: 'Kitchen Dining' },
+    { id: 4, checked: false, label: 'Pots and Pans Set' },
+    { id: 5, checked: false, label: 'Tea Kettle' },
   ])
+  const [message, setMessage] = useState(null)
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:3001/products`)
-      .then(response => {
-        setAllProducts(response.data)
+    productService
+      .getAll()
+      .then(initialProducts => {
+        setAllProducts(initialProducts)
       })
   }, [])
   
@@ -62,6 +45,8 @@ const App = () => {
     setCategories(changeCat)
   }
 
+
+  // apply filter on data
   useEffect(() => {
     let result = allProducts
 
@@ -100,11 +85,12 @@ const App = () => {
           <div style={{flexBasis: '280px'}}>
             <h2>Category</h2>
             <FilterPanel categories={categories} onChange={handleChecked}/>
-
+            <Notification message={message}/>
           </div>
           <div style={{flex: '1'}}>
             <h2>Products</h2>
             <section className="products">
+              
               <Products products={products}/>
             </section>
           </div>

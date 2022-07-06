@@ -2,7 +2,7 @@ import React from "react";
 
 const FilterPanel = ({categories, onChange}) => {
     return (
-        <div>
+        <div style={{paddingTop: '10px'}}>
             {categories.map(category => 
                 <ul style={{listStyleType: 'none', margin: '5px'}} key={category.id}>
                     <li>
