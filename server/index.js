@@ -5,7 +5,6 @@ const cors = require('cors')
 // const dotenv = require('dotenv').config()
 
 const app = express()
-const PORT = process.env.PORT || 5000
 
 app.use(cors())
 app.use(express.json())
@@ -136,14 +135,16 @@ let products = [
       image: "https://m.media-amazon.com/images/I/71ZWsq8K-CL._AC_SX679_.jpg",
       price: "439.99",
       category: "Dumbbell"
-    }
+    },
 ]
 
-
+// get all resources
 app.get('/api/products', (request, response) => {
     response.json(products)
 })
 
+
+// fetch single resource
 app.get('/api/products/:id', (request, response) => {
   const id = Number(request.params.id)
   const product = products.find(product => product.id === id)
@@ -156,6 +157,8 @@ app.get('/api/products/:id', (request, response) => {
   
 })
 
+
+// delete resource
 app.delete('/api/products/:id', (request, response) => {
   const id = Number(request.params.id)
   products = products.filter(product => product.id !== id)
@@ -171,6 +174,7 @@ const generateId = () => {
   return maxId + 1
 }
 
+// Add resource
 app.post('/api/products', (request, response) => {
   const body = request.body
 
@@ -199,7 +203,7 @@ app.post('/api/products', (request, response) => {
 //   const id = Number(request.params.id)
 // })
 
-
+const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
 })

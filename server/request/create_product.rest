@@ -1,7 +1,7 @@
-POST http://localhost:5000/api/products/
+POST http://localhost:3001/api/products/
 Content-type: application/json
 
 {
-    "content": "wassup moetherfucker",
-    "important": false
+    "title": "wassup moetherfucker",
+    "price": "200"
 }
