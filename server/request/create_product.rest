@@ -2,6 +2,7 @@ POST http://localhost:3001/api/products/
 Content-type: application/json
 
 {
-    "title": "wassup moetherfucker",
-    "price": "200"
+    "title": "pimpim",
+    "price": "439.99",
+    "category": "Dumbbell"
 }

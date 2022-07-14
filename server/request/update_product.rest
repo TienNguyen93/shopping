@@ -1,0 +1,6 @@
+PUT http://localhost:3001/api/products/62d04a8a519f76fd9a7ff993
+Content-type: application/json
+
+{
+    "image": "https://m.media-amazon.com/images/I/71XtDvr+dYL._AC_SX679_.jpg"
+}

@@ -1,0 +1,2 @@
+DELETE http://localhost:3001/api/products/62cdaf2f70a2d0b0e271834d
+Content-type: application/json
