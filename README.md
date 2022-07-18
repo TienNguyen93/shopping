@@ -14,7 +14,7 @@ A fullstack web application that displays a list of products and returns the des
 * [x] As a user I should be able to search the products
 * [x] As a user I should be able to filter the products based on their category
 * [ ] As a user I should be able to create account on the website
-* [ ] As a user I should be able to add products into my shopping cart
+* [ ] As a user I should be able to add products to their shopping cart
 
 ### Merchant Stories
 * [x] As a merchant I should be able to ADD new products into the database
