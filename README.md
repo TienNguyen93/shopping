@@ -4,6 +4,11 @@
 ### Description
 A fullstack web application that displays a list of products and returns the desired ones based on the input query retrieving from the search bar 
 
+### Tech Stack
+- ReactJS
+- Express
+- MongoDB
+
 ## Product Spec
 ### User Stories (Required)
 * [x] As a user I should be able to search the products
@@ -23,10 +28,11 @@ A fullstack web application that displays a list of products and returns the des
 #### Product
 | Property      | Type     | Description |
 | ------------- | -------- | ------------|
-| userId      | String   | user's Spotify id  |
-| image         | Image     | user's Spotify profile picture |
-| top songs       | Arraylist of Songs   | list of user's top played songs |
-
+| id      | String   | MongoDB's ObjectID  |
+| title      | String   | product's name  |
+| image         | String     | url |
+| price      | String   | product's price  |
+| category      | String   | product's category  |
 
 
 ### Walkthrough 
