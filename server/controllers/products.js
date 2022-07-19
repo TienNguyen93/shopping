@@ -2,32 +2,30 @@ const productsRouter = require('express').Router()
 const Product = require('../models/product')
 
 // get all resources
-productsRouter.get('/', (request, response) => {
-  Product.find({}).then(products => {
-    response.json(products)
-  })
+productsRouter.get('/', async (request, response) => {
+  const products = await Product.find({})
+  response.json(products)
 })
 
 
 // fetch single resource
-productsRouter.get('/:id', (request, response, next) => {
-  Product.findById(request.params.id)
-    .then(product => {
-      if (product) {
-        response.json(product)
-      } else {
-        response.status(404).end()
-      }
-  })
+productsRouter.get('/:id', async (request, response) => {
+    const product = await Product.findById(request.params.id)
+
+    if (product) {
+      response.json(product)
+    } else {
+      response.status(404).end()
+    }
+  
   // pass error forward with 'next' function
   // if next called w/o parameter, execution move onto next route | middleware
   // else, execution continue to error handler middleware
-  .catch(error => next(error))
 })
 
 
 // Add resource
-productsRouter.post('/', (request, response, next) => {
+productsRouter.post('/', async (request, response, next) => {
   const body = request.body
 
   const product = new Product({
@@ -37,26 +35,22 @@ productsRouter.post('/', (request, response, next) => {
     category: body.category,
   })
 
-  product.save()
-    .then(savedProduct => {
-      response.json(savedProduct)
-    })
-    .catch(error => next(error))
+  const savedProduct = await product.save()
+  response.status(201).json(savedProduct)
   
 })
 
 
 // delete resource
-productsRouter.delete('/:id', (request, response, next) => {
-  Product.findByIdAndRemove(request.params.id)
-    .then(result => {
-      response.status(204).end()
-    })
-    .catch(error => next(error))
+productsRouter.delete('/:id', async (request, response) => {
+  await Product.findByIdAndRemove(request.params.id)
+  response.status(204).end()
+
+  // eliminate try-catch w/ 'express-async-errors' library (found in app.js)
 })
 
 
-// update product
+// update resource
 productsRouter.put('/:id', (request, response, next) => {
   const body = request.body
 
