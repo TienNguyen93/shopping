@@ -1,4 +1,5 @@
 const Product = require('../models/product')
+const User = require('../models/user')
 
 const initialProducts = [
     {
@@ -40,8 +41,13 @@ const productsInDb = async () => {
 }
 
 
+const usersInDb = async () => {
+    const users = await User.find({})
+    return users.map(u => u.toJSON())
+}
+
 
 module.exports = {
-    initialProducts, nonExistingId, productsInDb
+    initialProducts, nonExistingId, productsInDb, usersInDb
 }
   
