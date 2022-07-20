@@ -13,14 +13,14 @@ A fullstack web application that displays a list of products and returns the des
 ### User Stories
 * [x] As a user I should be able to search the products
 * [x] As a user I should be able to filter the products based on their category
-* [ ] As a user I should be able to create account on the website
+* [ ] As a user I should be able to login on the website
 * [ ] As a user I should be able to add products to their shopping cart
 
 ### Merchant Stories
 * [x] As a merchant I should be able to ADD new products into the database
 * [x] As a merchant I should be able to EDIT product's properties
 * [x] As a merchant I should be able to DELETE new products from the database
-* [ ] As a merchant I should be able to store users' informations into the database
+* [x] As a merchant I should be able to store users' informations into the database
 
 
 ## Schema
