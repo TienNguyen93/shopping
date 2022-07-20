@@ -35,6 +35,16 @@ A fullstack web application that displays a list of products and returns the des
 | category      | String   | product's category  |
 
 
+
+#### User
+| Property      | Type     | Description |
+| ------------- | -------- | ------------|
+| id      | String   | MongoDB's ObjectID  |
+| username      | String   | user's preferred name  |
+| name         | String     | user's name |
+| passwordHash      | String   | user's encrypted password  |
+
+
 ### Walkthrough 
 ![](shopping-app.gif)
 
