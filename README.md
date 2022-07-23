@@ -13,7 +13,8 @@ A fullstack web application that displays a list of products and returns the des
 ### User Stories
 * [x] As a user I should be able to search the products
 * [x] As a user I should be able to filter the products based on their category
-* [ ] As a user I should be able to login on the website
+* [x] As a user I should be able to login on the website
+* [ ] As a user I should be able to logout on the website
 * [ ] As a user I should be able to add products to their shopping cart
 
 ### Merchant Stories

@@ -4,12 +4,12 @@ const userSchema = new mongoose.Schema({
   username: String,
   name: String,
   passwordHash: String,
-  products: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Product'
-    }
-  ],
+  // products: [
+  //   {
+  //     type: mongoose.Schema.Types.ObjectId,
+  //     ref: 'Product'
+  //   }
+  // ],
 })
 
 

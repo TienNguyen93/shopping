@@ -1,13 +1,14 @@
-import {useState, useEffect} from 'react'
-import axios from 'axios'
-import {FaSearch} from "react-icons/fa";
+import { useState, useEffect } from 'react'
 import './App.css'
 
 import Products from './components/Products';
 import Search from './components/Search';
 import FilterPanel from './components/FilterPanel';
 import Notification from './components/Notification';
-import productService from './service/service';
+import productService from './services/service';
+import loginService from './services/login'
+import LoginForm from './components/LoginForm';
+import Togglable from './components/Togglable';
 
 const App = () => {
   const [products, setProducts] = useState([])
@@ -21,9 +22,9 @@ const App = () => {
     { id: 5, checked: false, label: 'Tea Kettle' },
   ])
   const [message, setMessage] = useState(null)
-  const [username, setUsername] = useState('') 
-  const [password, setPassword] = useState('') 
-
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [user, setUser] = useState(null)
 
   useEffect(() => {
     productService
@@ -32,19 +33,62 @@ const App = () => {
         setAllProducts(initialProducts)
       })
   }, [])
-  
+
+
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('loggedNoteappUser')
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON)
+      setUser(user)
+    }
+  }, [])
+
+
+  const handleLogin = async (event) => {
+    event.preventDefault()
+    
+    try {
+      const user = await loginService.login({
+        username, password
+      })
+
+      window.localStorage.setItem(
+        'loggedNoteappUser', JSON.stringify(user)
+      )
+
+      setUser(user)
+      setUsername('')
+      setPassword('')
+    } catch (exception) {
+      setMessage('wrong credentials')
+      setTimeout(() => {
+        setMessage(null)
+      }, 5000)
+    }
+  }
+
+
+  const handleLogout = async (event) => {
+    event.preventDefault()
+    console.log('user log out')
+    window.localStorage.removeItem('loggedNoteappUser')
+    setUser(null)
+  }
+
+
   const handleSearch = (event) => {
     console.log(event.target.value)
     setSearch(event.target.value)
   }
 
+
   const handleChecked = (id) => {
-    console.log('check is clicked') 
+    console.log('check is clicked')
     const initialCat = categories
-    const changeCat = initialCat.map(category => 
-      category.id === id ? {...category, checked: !category.checked} : category
+    const changeCat = initialCat.map(category =>
+      category.id === id ? { ...category, checked: !category.checked } : category
     )
-    
+
     setCategories(changeCat)
   }
 
@@ -56,7 +100,7 @@ const App = () => {
     // Search function
     if (search) {
       result = result.filter(product => product.title.toLowerCase().includes(search))
-    } 
+    }
 
     // Category filter
     const categoryChecked = categories
@@ -73,65 +117,85 @@ const App = () => {
   }, [allProducts, search, categories])
 
 
-  const handleLogin = (event) => {
-    event.preventDefault()
-    console.log('login with', username, password)
-  }
-
   return (
     <div className="App">
       <div className="header-container">
-            <h1 style={{padding: '10px'}}>Shopping Spree</h1>
+        <h1 style={{ padding: '10px' }}>Shopping Spree</h1>
 
-            <div className="search-form">
-              <Search value={search} onChange={handleSearch}/>
-            </div>
+        <div className="search-form">
+          <Search value={search} onChange={handleSearch} />
+        </div>
 
-            <form onSubmit={handleLogin}>
-              <div>
-                username
-                <input
-                  type="text"
-                  value={username}
-                  name="Username"
-                  onChange={({ target }) => setUsername(target.value)}
-                  />
-              </div>
-              <div>
-                password
-                <input 
-                  type="password"
-                  value={password}
-                  name="Password"
-                  onChange={({ target }) => setPassword(target.value)}/>
-              </div>
-              <button type="submit">login</button>
-            </form>
+        {user === null ?
+          <Togglable buttonLabel='login'>
+            <LoginForm
+              username={username}
+              password={password}
+              handleUsernameChange={({ target }) => setUsername(target.value)}
+              handlePasswordChange={({ target }) => setPassword(target.value)}
+              handleSubmit={handleLogin}
+            />
+          </Togglable> :
+          <div>
+            <p>{user.name} logged in</p>
+          </div>
+
+        }
+
+        <button type="submit" onClick={handleLogout}>
+          logout
+        </button>
+
       </div>
 
 
       <div className="body">
-        <div style={{display: 'flex', flex: '1'}}>
-          <div style={{flexBasis: '280px'}}>
+        <div style={{ display: 'flex', flex: '1' }}>
+          <div style={{ flexBasis: '280px' }}>
             <h2>Category</h2>
-            <FilterPanel categories={categories} onChange={handleChecked}/>
-            <Notification message={message}/>
+            <FilterPanel categories={categories} onChange={handleChecked} />
+            <Notification message={message} />
           </div>
-          <div style={{flex: '1'}}>
+          <div style={{ flex: '1' }}>
             <h2>Products</h2>
             <section className="products">
-              
-              <Products products={products}/>
+
+              <Products products={products} />
             </section>
           </div>
         </div>
       </div>
 
     </div>
-    
+
   )
 }
 
 export default App;
 
+
+
+
+// const loginForm = () => {
+  //   const hideWhenVisible = { display: loginVisible ? 'none' : '' }
+  //   const showWhenVisible = { display: loginVisible ? '' : 'none' }
+
+  //   return (
+  //     <div>
+  //       <div style={hideWhenVisible}>
+  //         <button onClick={() => loginVisible(true)}>log in</button>
+  //       </div>
+  //       <div style={showWhenVisible}>
+  //         <LoginForm
+  //           username={username}
+  //           password={password}
+  //           handleUsernameChange={({ target }) => setUsername(target.value)}
+  //           handlePasswordChange={({ target }) => setPassword(target.value)}
+  //           handleSubmit={handleLogin}
+  //         />
+  //         <button onClick={() => setLoginVisible(false)}>cancel</button>
+  //       </div>
+  //     </div>
+  //   )
+  // }
 
