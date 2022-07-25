@@ -26,6 +26,7 @@ const App = () => {
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
 
+
   useEffect(() => {
     productService
       .getAll()
@@ -42,6 +43,30 @@ const App = () => {
       setUser(user)
     }
   }, [])
+
+
+  // apply filter on data
+  useEffect(() => {
+    let result = allProducts
+
+    // Search function
+    if (search) {
+      result = result.filter(product => product.title.toLowerCase().includes(search))
+    }
+
+    // Category filter
+    const categoryChecked = categories
+      .filter(category => category.checked)
+      .map(category => category.label.toLowerCase())
+
+    if (categoryChecked.length) {
+      result = result
+        .filter(item => categoryChecked.includes(item.category.toLowerCase()))
+    }
+
+    setProducts(result)
+
+  }, [allProducts, search, categories])
 
 
   const handleLogin = async (event) => {
@@ -92,30 +117,16 @@ const App = () => {
     setCategories(changeCat)
   }
 
-
-  // apply filter on data
-  useEffect(() => {
-    let result = allProducts
-
-    // Search function
-    if (search) {
-      result = result.filter(product => product.title.toLowerCase().includes(search))
-    }
-
-    // Category filter
-    const categoryChecked = categories
-      .filter(category => category.checked)
-      .map(category => category.label.toLowerCase())
-
-    if (categoryChecked.length) {
-      result = result
-        .filter(item => categoryChecked.includes(item.category.toLowerCase()))
-    }
-
-    setProducts(result)
-
-  }, [allProducts, search, categories])
-
+  // const loginForm = () => (
+  //   <Togglable buttonLabel='login'>
+  //     <LoginForm 
+  //       username={username}
+  //       password={password}
+  //       handleUsernameChange={({ target }) => setUsername(target.value)}
+  //       handlePasswordChange={({ target }) => setPassword(target.value)}
+  //       handleSubmit={handleLogin}/>
+  //   </Togglable>
+  // )
 
   return (
     <div className="App">
@@ -136,15 +147,17 @@ const App = () => {
               handleSubmit={handleLogin}
             />
           </Togglable> :
+          
           <div>
             <p>{user.name} logged in</p>
           </div>
-
         }
 
         <button type="submit" onClick={handleLogout}>
           logout
         </button>
+
+        <Notification message={message} />
 
       </div>
 
