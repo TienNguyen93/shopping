@@ -65,13 +65,11 @@
     list-style-type: none;
 }
 
-/* .panelListWrap, .panelWrap, .listWrap {
-    overflow-y: auto;
-} */
 
-/* ::-webkit-scrollbar {
-    display: none;
-} */
+.product-title {
+    color: #007185
+}
 
-
-
+.product-title:hover {
+    color: #800000
+}

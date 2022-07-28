@@ -8,6 +8,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.4.0",
+    "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
@@ -17,7 +18,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "server": "json-server -p3001 --watch db.json",
-    "eslint": "eslint ."
+    "cypress:open": "cypress open"
   },
   "proxy": "http://localhost:3001",
   "eslintConfig": {
@@ -42,6 +43,7 @@
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^14.3.0",
+    "cypress": "^10.3.1",
     "eslint-plugin-jest": "^26.6.0",
     "jest-watch-typeahead": "^0.6.5",
     "json-server": "^0.17.0"

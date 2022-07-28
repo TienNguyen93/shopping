@@ -1,4 +1,9 @@
 import { useState, useEffect } from 'react'
+import { 
+  BrowserRouter as Router, 
+  Routes, Route, Link
+} from 'react-router-dom'
+
 import './App.css'
 
 import Products from './components/Products';
@@ -9,6 +14,11 @@ import productService from './services/service';
 import loginService from './services/login'
 import LoginForm from './components/LoginForm';
 import Togglable from './components/Togglable';
+import Product from './components/Product';
+
+import HomeScreen from './screens/HomeScreen';
+import CartScreen from './screens/CartScreen';
+import ProductScreen from './screens/ProductScreen';
 
 const App = () => {
   const [products, setProducts] = useState([])
@@ -101,10 +111,10 @@ const App = () => {
   }
 
 
-  const handleSearch = (event) => {
-    console.log(event.target.value)
-    setSearch(event.target.value)
-  }
+  // const handleSearch = (event) => {
+  //   console.log(event.target.value)
+  //   setSearch(event.target.value)
+  // }
 
 
   const handleChecked = (id) => {
@@ -128,8 +138,29 @@ const App = () => {
   //   </Togglable>
   // )
 
+  const padding = {
+    padding: 5
+  }
+
   return (
-    <div className="App">
+    <Router>
+      
+      <div>
+        <Link style={padding} to="/">home</Link>
+        <Link style={padding} to="/cart">cart</Link>
+        <Link style={padding}to="/products/:id">product</Link>
+        <Link style={padding}to="/products">product</Link>
+      </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                             
+      <Routes>
+        <Route path="/" element={<HomeScreen />} />
+        <Route path="/cart" element={<CartScreen />} />
+        <Route path="/products/:id" element={<Product product={products} />} />
+        <Route path="/products" element={<Products products={products} />}/>
+      </Routes>
+
+
+      {/* <div className="App">
       <div className="header-container">
         <h1 style={{ padding: '10px' }}>Shopping Spree</h1>
 
@@ -179,36 +210,11 @@ const App = () => {
         </div>
       </div>
 
-    </div>
+      </div> */}
+    </Router>
 
   )
 }
 
 export default App;
-
-
-
-
-// const loginForm = () => {
-  //   const hideWhenVisible = { display: loginVisible ? 'none' : '' }
-  //   const showWhenVisible = { display: loginVisible ? '' : 'none' }
-
-  //   return (
-  //     <div>
-  //       <div style={hideWhenVisible}>
-  //         <button onClick={() => loginVisible(true)}>log in</button>
-  //       </div>
-  //       <div style={showWhenVisible}>
-  //         <LoginForm
-  //           username={username}
-  //           password={password}
-  //           handleUsernameChange={({ target }) => setUsername(target.value)}
-  //           handlePasswordChange={({ target }) => setPassword(target.value)}
-  //           handleSubmit={handleLogin}
-  //         />
-  //         <button onClick={() => setLoginVisible(false)}>cancel</button>
-  //       </div>
-  //     </div>
-  //   )
-  // }
 
