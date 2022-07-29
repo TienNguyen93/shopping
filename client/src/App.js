@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
-import { 
-  BrowserRouter as Router, 
-  Routes, Route, Link
+import {
+  BrowserRouter as Router,
+  Routes, Route, Link, Navigate, useNavigate
 } from 'react-router-dom'
 
 import './App.css'
@@ -20,6 +20,8 @@ import HomeScreen from './screens/HomeScreen';
 import CartScreen from './screens/CartScreen';
 import ProductScreen from './screens/ProductScreen';
 
+
+
 const App = () => {
   const [products, setProducts] = useState([])
   const [allProducts, setAllProducts] = useState([])
@@ -36,6 +38,7 @@ const App = () => {
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
 
+  // const nav = useNavigate()
 
   useEffect(() => {
     productService
@@ -81,19 +84,21 @@ const App = () => {
 
   const handleLogin = async (event) => {
     event.preventDefault()
-    
+
     try {
       const user = await loginService.login({
         username, password
       })
+      
 
       window.localStorage.setItem(
         'loggedNoteappUser', JSON.stringify(user)
-      )
+      ) 
 
       setUser(user)
       setUsername('')
       setPassword('')
+      
     } catch (exception) {
       setMessage('wrong credentials')
       setTimeout(() => {
@@ -123,40 +128,88 @@ const App = () => {
     const changeCat = initialCat.map(category =>
       category.id === id ? { ...category, checked: !category.checked } : category
     )
-
     setCategories(changeCat)
   }
 
-  // const loginForm = () => (
-  //   <Togglable buttonLabel='login'>
-  //     <LoginForm 
-  //       username={username}
-  //       password={password}
-  //       handleUsernameChange={({ target }) => setUsername(target.value)}
-  //       handlePasswordChange={({ target }) => setPassword(target.value)}
-  //       handleSubmit={handleLogin}/>
-  //   </Togglable>
-  // )
 
   const padding = {
     padding: 5
   }
 
+
+  // const Login = (props) => {
+  //   const navigate = useNavigate()
+
+  //   const onSubmit = (event) => {
+  //     event.preventDefault()
+  //     props.onLogin('tn')
+  //     navigate('/')
+  //   }
+
+  //   return (
+  //     <div>
+  //       <h2>login</h2>
+  //       <form onSubmit={onSubmit}>
+  //         <div>
+  //           username: <input />
+  //         </div>
+  //         <div>
+  //           password: <input type='password' />
+  //         </div>
+  //         <button type="submit">login</button>
+  //       </form>
+  //     </div>
+  //   )
+  // }
+
+
+
+  const Users = () => (
+    <div>
+      <h2>TKTL notes app</h2>
+      <ul>
+        <li>Matti Luukkainen</li>
+        <li>Juha Tauriainen</li>
+        <li>Arto Hellas</li>
+      </ul>
+    </div>
+  )
+
+  const Logout = ({handleLogout}) => (
+    <button type="submit" onClick={handleLogout}>
+      Logout
+    </button>
+  )
+
   return (
     <Router>
-      
+
       <div>
-        <Link style={padding} to="/">home</Link>
-        <Link style={padding} to="/cart">cart</Link>
-        <Link style={padding}to="/products/:id">product</Link>
-        <Link style={padding}to="/products">product</Link>
+        <Link style={padding} to="/">Home</Link>
+        <Link style={padding} to="/cart">Cart</Link>
+        <Link style={padding} to="/users">users</Link>
+        {user 
+          ? <em>{user.name} logged in</em>
+          : <Link style={padding} to="/login">Login</Link>
+        }
+        <Link style={padding} to="/logout">Logout</Link>
       </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                             
+
       <Routes>
         <Route path="/" element={<HomeScreen />} />
         <Route path="/cart" element={<CartScreen />} />
         <Route path="/products/:id" element={<Product product={products} />} />
-        <Route path="/products" element={<Products products={products} />}/>
+        <Route path="/users" element={user ? <Users /> : <Navigate replace to="/login" />} />
+        <Route path="/login" element={
+          <LoginForm 
+            username={username}
+            password={password}
+            handleUsernameChange={({ target }) => setUsername(target.value)}
+            handlePasswordChange={({ target }) => setPassword(target.value)}
+            // handleSubmit={handleLogin}
+            />
+        }/>
+        <Route path="/logout" element={<Logout handleLogout={handleLogout}/>} />
       </Routes>
 
 
