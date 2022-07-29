@@ -37,8 +37,7 @@ const App = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
-
-  // const nav = useNavigate()
+  
 
   useEffect(() => {
     productService
@@ -82,30 +81,31 @@ const App = () => {
   }, [allProducts, search, categories])
 
 
-  const handleLogin = async (event) => {
-    event.preventDefault()
 
-    try {
-      const user = await loginService.login({
-        username, password
-      })
+  // const handleLogin = async (event) => {
+  //   event.preventDefault()
+
+  //   try {
+  //     const user = await loginService.login({
+  //       username, password
+  //     })
       
 
-      window.localStorage.setItem(
-        'loggedNoteappUser', JSON.stringify(user)
-      ) 
+  //     window.localStorage.setItem(
+  //       'loggedNoteappUser', JSON.stringify(user)
+  //     ) 
 
-      setUser(user)
-      setUsername('')
-      setPassword('')
+  //     setUser(user)
+  //     setUsername('')
+  //     setPassword('')
       
-    } catch (exception) {
-      setMessage('wrong credentials')
-      setTimeout(() => {
-        setMessage(null)
-      }, 5000)
-    }
-  }
+  //   } catch (exception) {
+  //     setMessage('wrong credentials')
+  //     setTimeout(() => {
+  //       setMessage(null)
+  //     }, 5000)
+  //   }
+  // }
 
 
   const handleLogout = async (event) => {
@@ -170,16 +170,24 @@ const App = () => {
       <ul>
         <li>Matti Luukkainen</li>
         <li>Juha Tauriainen</li>
-        <li>Arto Hellas</li>
       </ul>
     </div>
   )
+
 
   const Logout = ({handleLogout}) => (
     <button type="submit" onClick={handleLogout}>
       Logout
     </button>
   )
+
+
+  const handleSetUser = (user) => {
+    console.log('handle set user')
+    setUser(user)
+  }
+
+  
 
   return (
     <Router>
@@ -200,15 +208,16 @@ const App = () => {
         <Route path="/cart" element={<CartScreen />} />
         <Route path="/products/:id" element={<Product product={products} />} />
         <Route path="/users" element={user ? <Users /> : <Navigate replace to="/login" />} />
-        <Route path="/login" element={
+        {/* <Route path="/login" element={
           <LoginForm 
             username={username}
             password={password}
             handleUsernameChange={({ target }) => setUsername(target.value)}
             handlePasswordChange={({ target }) => setPassword(target.value)}
-            // handleSubmit={handleLogin}
+            handleSubmit={handleLogin}
             />
-        }/>
+        }/> */}
+        <Route path="/login" element={<LoginForm handleSetUser={handleSetUser}/>} />
         <Route path="/logout" element={<Logout handleLogout={handleLogout}/>} />
       </Routes>
 

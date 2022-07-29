@@ -6,9 +6,10 @@ const Notification = ({message}) => {
     }
 
     return (
-        <div>
-            {message}
-        </div>
+        alert(message)
+        // <div>
+        //     {message}
+        // </div>
     )
 }
 
