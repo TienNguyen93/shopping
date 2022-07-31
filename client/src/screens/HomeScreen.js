@@ -1,5 +1,6 @@
 import React from "react"
 import { useState, useEffect } from "react"
+import { Alert } from 'react-bootstrap'
 
 import FilterPanel from "../components/FilterPanel"
 import Products from "../components/Products"
@@ -64,6 +65,7 @@ const HomeScreen = () => {
 
     return (
         <div className="App">
+
             <div className="body">
                 <h1>Home screen here</h1>
                 <div style={{ display: 'flex', flex: '1' }}>

@@ -2,12 +2,13 @@ import React from "react";
 import PropTypes from 'prop-types'
 import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
-import { Table, Form, Button } from 'react-bootstrap'
+import { Table, Form, Button, Alert } from 'react-bootstrap'
 
 import loginService from '../services/login'
+import Notification from "./Notification";
 
 
-const LoginForm = ({handleSetUser}) => {
+const LoginForm = ({ handleSetUser }) => {
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -45,33 +46,26 @@ const LoginForm = ({handleSetUser}) => {
   return (
     <div>
       <h2>Login</h2>
-
       <Form onSubmit={handleLogin}>
         <Form.Group>
           <Form.Label>username:</Form.Label>
-          <Form.Control 
+          <Form.Control
             type="text"
             // name="username"
             value={username}
             onChange={e => setUsername(e.target.value)}
-              />
-        </Form.Group>
-        {/* <div>
-          username
-          <input
-            value={username}
-            onChange={e => setUsername(e.target.value)}
           />
-        </div> */}
-        <div>
-          password
-          <input
+          <Form.Label>password:</Form.Label>
+          <Form.Control
             type="password"
+            // name="password"
             value={password}
             onChange={e => setPassword(e.target.value)}
           />
-        </div>
-        <button type="submit">login</button>
+        </Form.Group>
+        <Button variant="primary" type="submit">
+          login
+        </Button>
       </Form>
     </div>
   )

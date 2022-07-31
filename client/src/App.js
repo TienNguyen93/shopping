@@ -3,6 +3,7 @@ import {
   BrowserRouter as Router,
   Routes, Route, Link, Navigate, useMatch
 } from 'react-router-dom'
+import { Alert } from 'react-bootstrap'
 
 import './App.css'
 
@@ -83,32 +84,6 @@ const App = () => {
 
 
 
-  // const handleLogin = async (event) => {
-  //   event.preventDefault()
-
-  //   try {
-  //     const user = await loginService.login({
-  //       username, password
-  //     })
-      
-
-  //     window.localStorage.setItem(
-  //       'loggedNoteappUser', JSON.stringify(user)
-  //     ) 
-
-  //     setUser(user)
-  //     setUsername('')
-  //     setPassword('')
-      
-  //   } catch (exception) {
-  //     setMessage('wrong credentials')
-  //     setTimeout(() => {
-  //       setMessage(null)
-  //     }, 5000)
-  //   }
-  // }
-
-
   const handleLogout = async (event) => {
     event.preventDefault()
     console.log('user log out')
@@ -123,14 +98,14 @@ const App = () => {
   // }
 
 
-  const handleChecked = (id) => {
-    console.log('check is clicked')
-    const initialCat = categories
-    const changeCat = initialCat.map(category =>
-      category.id === id ? { ...category, checked: !category.checked } : category
-    )
-    setCategories(changeCat)
-  }
+  // const handleChecked = (id) => {
+  //   console.log('check is clicked')
+  //   const initialCat = categories
+  //   const changeCat = initialCat.map(category =>
+  //     category.id === id ? { ...category, checked: !category.checked } : category
+  //   )
+  //   setCategories(changeCat)
+  // }
 
 
 
@@ -167,7 +142,7 @@ const App = () => {
   return (
     <div className="container">
       <NavBar user={user}/>
-
+      
       <Routes>
         <Route path="/" element={<HomeScreen />} />
         <Route path="/cart" element={<CartScreen />} />
