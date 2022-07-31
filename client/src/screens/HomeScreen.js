@@ -50,6 +50,7 @@ const HomeScreen = () => {
         setProducts(result)
 
     }, [allProducts, search, categories])
+    
 
     const handleChecked = (id) => {
         console.log('check is clicked')

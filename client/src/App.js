@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import {
   BrowserRouter as Router,
-  Routes, Route, Link, Navigate, useNavigate
+  Routes, Route, Link, Navigate, useMatch
 } from 'react-router-dom'
 
 import './App.css'
@@ -15,6 +15,7 @@ import loginService from './services/login'
 import LoginForm from './components/LoginForm';
 import Togglable from './components/Togglable';
 import Product from './components/Product';
+import NavBar from './components/NavBar';
 
 import HomeScreen from './screens/HomeScreen';
 import CartScreen from './screens/CartScreen';
@@ -132,37 +133,6 @@ const App = () => {
   }
 
 
-  const padding = {
-    padding: 5
-  }
-
-
-  // const Login = (props) => {
-  //   const navigate = useNavigate()
-
-  //   const onSubmit = (event) => {
-  //     event.preventDefault()
-  //     props.onLogin('tn')
-  //     navigate('/')
-  //   }
-
-  //   return (
-  //     <div>
-  //       <h2>login</h2>
-  //       <form onSubmit={onSubmit}>
-  //         <div>
-  //           username: <input />
-  //         </div>
-  //         <div>
-  //           password: <input type='password' />
-  //         </div>
-  //         <button type="submit">login</button>
-  //       </form>
-  //     </div>
-  //   )
-  // }
-
-
 
   const Users = () => (
     <div>
@@ -188,35 +158,21 @@ const App = () => {
   }
 
   
+  const match = useMatch('/products/:id')
+  const product = match 
+    ? products.find(p => p.id === String(match.params.id))
+    : null
+
 
   return (
-    <Router>
-
-      <div>
-        <Link style={padding} to="/">Home</Link>
-        <Link style={padding} to="/cart">Cart</Link>
-        <Link style={padding} to="/users">users</Link>
-        {user 
-          ? <em>{user.name} logged in</em>
-          : <Link style={padding} to="/login">Login</Link>
-        }
-        <Link style={padding} to="/logout">Logout</Link>
-      </div>
+    <div className="container">
+      <NavBar user={user}/>
 
       <Routes>
         <Route path="/" element={<HomeScreen />} />
         <Route path="/cart" element={<CartScreen />} />
-        <Route path="/products/:id" element={<Product product={products} />} />
+        <Route path="/products/:id" element={<Product product={product} />} />
         <Route path="/users" element={user ? <Users /> : <Navigate replace to="/login" />} />
-        {/* <Route path="/login" element={
-          <LoginForm 
-            username={username}
-            password={password}
-            handleUsernameChange={({ target }) => setUsername(target.value)}
-            handlePasswordChange={({ target }) => setPassword(target.value)}
-            handleSubmit={handleLogin}
-            />
-        }/> */}
         <Route path="/login" element={<LoginForm handleSetUser={handleSetUser}/>} />
         <Route path="/logout" element={<Logout handleLogout={handleLogout}/>} />
       </Routes>
@@ -273,7 +229,7 @@ const App = () => {
       </div>
 
       </div> */}
-    </Router>
+    </div>
 
   )
 }

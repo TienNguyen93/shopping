@@ -30,19 +30,19 @@ const Product = ({product}) => {
         }
     }
 
-    const id = useParams().id
-    // console.log('id here', id)
+    // const id = useParams().id
+    // // console.log('id here', id)
 
-    const prod = product.find(n => n.id === String(id))
+    // const prod = product.find(n => n.id === String(id))
 
     return (
         <div style={style.product}>
             <div style={{textAlign: 'center'}}>
-                <img style={style.image} src={prod.image} alt="" />
+                <img style={style.image} src={product.image} alt="" />
             </div>
             <div style={{padding: '10px', textAlign: 'left', lineHeight: '25px'}}>
                 <ul style={{listStyleType: 'none'}}>
-                    <li>{prod.title}</li>
+                    <li>{product.title}</li>
                     <div>
                     {[...Array(5)].map((star, index) => {        
                         return (           
@@ -52,7 +52,7 @@ const Product = ({product}) => {
                     </div>
             
                     <li style={{fontSize: '18px', paddingTop: '5px'}}>
-                        ${prod.price}
+                        ${product.price}
                     </li>
                 </ul>
             </div>

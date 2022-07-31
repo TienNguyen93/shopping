@@ -2,47 +2,11 @@ import React from "react";
 import PropTypes from 'prop-types'
 import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import { Table, Form, Button } from 'react-bootstrap'
 
 import loginService from '../services/login'
 
 
-/* initial code */
-// const LoginForm = ({ handleSubmit, handleUsernameChange,
-//   handlePasswordChange, username, password }) => {
-
-//   return (
-//     <div>
-//       <h2>Login</h2>
-
-//       <form onSubmit={handleSubmit}>
-//         <div>
-//           username
-//           <input
-//             value={username}
-//             onChange={handleUsernameChange}
-//           />
-//         </div>
-//         <div>
-//           password
-//           <input
-//             type="password"
-//             value={password}
-//             onChange={handlePasswordChange}
-//           />
-//         </div>
-//         <button type="submit">login</button>
-//       </form>
-//     </div>
-//   )
-// }
-
-
-
-
-
-
-
-//////////////////////////////////////////////////////////////
 const LoginForm = ({handleSetUser}) => {
 
   const [username, setUsername] = useState('')
@@ -66,7 +30,6 @@ const LoginForm = ({handleSetUser}) => {
         'loggedNoteappUser', JSON.stringify(user)
       )
 
-      // setUser(user)
       handleSetUser(user)
       setUsername('')
       setPassword('')
@@ -83,14 +46,23 @@ const LoginForm = ({handleSetUser}) => {
     <div>
       <h2>Login</h2>
 
-      <form onSubmit={handleLogin}>
-        <div>
+      <Form onSubmit={handleLogin}>
+        <Form.Group>
+          <Form.Label>username:</Form.Label>
+          <Form.Control 
+            type="text"
+            // name="username"
+            value={username}
+            onChange={e => setUsername(e.target.value)}
+              />
+        </Form.Group>
+        {/* <div>
           username
           <input
             value={username}
             onChange={e => setUsername(e.target.value)}
           />
-        </div>
+        </div> */}
         <div>
           password
           <input
@@ -100,7 +72,7 @@ const LoginForm = ({handleSetUser}) => {
           />
         </div>
         <button type="submit">login</button>
-      </form>
+      </Form>
     </div>
   )
 }
