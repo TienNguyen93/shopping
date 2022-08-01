@@ -51,7 +51,7 @@ const HomeScreen = () => {
         setProducts(result)
 
     }, [allProducts, search, categories])
-    
+
 
     const handleChecked = (id) => {
         console.log('check is clicked')
@@ -81,6 +81,11 @@ const HomeScreen = () => {
                         </section>
                     </div>
                 </div>
+            </div>
+
+            <div>
+                <br />
+                <em>Shopping Spree, TN</em>
             </div>
         </div>
     )
