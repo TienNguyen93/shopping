@@ -11,6 +11,8 @@
     align-items: center;
     padding: 20px;
     border-bottom: 2px solid #313131;
+    font-size: larger;
+    font-weight: bolder;
 }
 
 .search-form {
@@ -72,4 +74,15 @@
 
 .product-title:hover {
     color: #800000
+}
+
+
+.nav-link {
+    color: black
+}
+
+.nav-link:hover{
+    color: green;
+    border: 0.9px solid;
+    border-radius: 0.5rem;
 }

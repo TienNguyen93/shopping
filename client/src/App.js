@@ -59,28 +59,28 @@ const App = () => {
   }, [])
 
 
-  // apply filter on data
-  useEffect(() => {
-    let result = allProducts
+  // // apply filter on data
+  // useEffect(() => {
+  //   let result = allProducts
 
-    // Search function
-    if (search) {
-      result = result.filter(product => product.title.toLowerCase().includes(search))
-    }
+  //   // Search function
+  //   if (search) {
+  //     result = result.filter(product => product.title.toLowerCase().includes(search))
+  //   }
 
-    // Category filter
-    const categoryChecked = categories
-      .filter(category => category.checked)
-      .map(category => category.label.toLowerCase())
+  //   // Category filter
+  //   const categoryChecked = categories
+  //     .filter(category => category.checked)
+  //     .map(category => category.label.toLowerCase())
 
-    if (categoryChecked.length) {
-      result = result
-        .filter(item => categoryChecked.includes(item.category.toLowerCase()))
-    }
+  //   if (categoryChecked.length) {
+  //     result = result
+  //       .filter(item => categoryChecked.includes(item.category.toLowerCase()))
+  //   }
 
-    setProducts(result)
+  //   setProducts(result)
 
-  }, [allProducts, search, categories])
+  // }, [allProducts, search, categories])
 
 
 
@@ -92,10 +92,10 @@ const App = () => {
   }
 
 
-  // const handleSearch = (event) => {
-  //   console.log(event.target.value)
-  //   setSearch(event.target.value)
-  // }
+  const handleSearch = (event) => {
+    console.log(event.target.value)
+    setSearch(event.target.value)
+  }
 
 
   // const handleChecked = (id) => {
@@ -141,7 +141,7 @@ const App = () => {
 
   return (
     <div className="container">
-      <NavBar user={user}/>
+      <NavBar user={user} allProducts={allProducts}/>
       
       <Routes>
         <Route path="/" element={<HomeScreen />} />
