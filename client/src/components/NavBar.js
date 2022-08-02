@@ -1,13 +1,9 @@
 import { Link } from 'react-router-dom'
-import { Nav, Navbar, Container, Form } from 'react-bootstrap'
-import { useEffect, useState, useContext  } from 'react'
+import { Nav, Navbar, Container, Form, Button, InputGroup } from 'react-bootstrap'
+import { useState } from 'react'
+import { FaSistrix } from 'react-icons/fa'
 
-import HomeScreen from '../screens/HomeScreen'
-
-
-const NavBar = ({ user, allProducts, search, setSearch }) => {
-    const [products, setProducts] = useState([])
-
+const NavBar = ({ user, search, setSearch }) => {
 
     const handleSearch = (event) => {
         console.log(event.target.value)
@@ -27,6 +23,7 @@ const NavBar = ({ user, allProducts, search, setSearch }) => {
     return (
         <Navbar collapseOnSelect expand="lg" className="header-container">
             <Container>
+
                 <Navbar.Brand>
                     <Nav.Link href="#" as="span" style={{ border: 'none' }} >
                         <Link className="nav-link" style={{ textDecoration: 'none' }} to="/">
@@ -34,15 +31,10 @@ const NavBar = ({ user, allProducts, search, setSearch }) => {
                         </Link>
                     </Nav.Link>
                 </Navbar.Brand>
+
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
-                    <Nav className="me-auto">
-                        {/* <Form>
-                            <Form.Control
-                                type="search"
-                                value={search}
-                                onChange={handleSearch} />
-                        </Form> */}
+                    <Nav className="ms-auto">
 
                         <Nav.Link href="#" as="span" style={{ border: 'none' }}>
                             <Link className="nav-link" style={{ textDecoration: 'none' }} to="/users">
@@ -71,6 +63,21 @@ const NavBar = ({ user, allProducts, search, setSearch }) => {
                             </Link>
                         </Nav.Link>
                     </Nav>
+
+                    <Form>
+                        <InputGroup className="mb-3">
+                            <Form.Control
+                                type="search"
+                                value={search}
+                                onChange={handleSearch} />
+                            <Button variant="outline-secondary" id="button-addon2">
+                                <FaSistrix color="red" size={12} />
+                            </Button>
+                        </InputGroup>
+                    </Form>
+                    
+
+
                 </Navbar.Collapse>
             </Container>
         </Navbar >
@@ -78,3 +85,5 @@ const NavBar = ({ user, allProducts, search, setSearch }) => {
 }
 
 export default NavBar
+
+// variant="outline-success"
