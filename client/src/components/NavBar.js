@@ -1,44 +1,12 @@
 import { Link } from 'react-router-dom'
 import { Nav, Navbar, Container, Form } from 'react-bootstrap'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext  } from 'react'
 
-import Search from './Search'
+import HomeScreen from '../screens/HomeScreen'
 
-const NavBar = ({ user, allProducts }) => {
+
+const NavBar = ({ user, allProducts, search, setSearch }) => {
     const [products, setProducts] = useState([])
-    const [search, setSearch] = useState("")
-    const [categories, setCategories] = useState([
-        { id: 1, checked: false, label: 'Dumbbell' },
-        { id: 2, checked: false, label: 'Electronics' },
-        { id: 3, checked: false, label: 'Kitchen Dining' },
-        { id: 4, checked: false, label: 'Pots and Pans Set' },
-        { id: 5, checked: false, label: 'Tea Kettle' },
-    ])
-
-
-    // // apply filter on data
-    // useEffect(() => {
-    //     let result = allProducts
-
-    //     // Search function
-    //     if (search) {
-    //         result = result.filter(product => product.title.toLowerCase().includes(search))
-    //     }
-
-    //     // Category filter
-    //     const categoryChecked = categories
-    //         .filter(category => category.checked)
-    //         .map(category => category.label.toLowerCase())
-
-    //     if (categoryChecked.length) {
-    //         result = result
-    //             .filter(item => categoryChecked.includes(item.category.toLowerCase()))
-    //     }
-
-    //     setProducts(result)
-
-    // }, [allProducts, search, categories])
-
 
 
     const handleSearch = (event) => {
@@ -52,8 +20,12 @@ const NavBar = ({ user, allProducts }) => {
     }
 
 
+    // console.log('search navbar.js', search)
+
+    // variant="tabs"
+
     return (
-        <Navbar collapseOnSelect expand="lg" className="header-container" variant="tabs">
+        <Navbar collapseOnSelect expand="lg" className="header-container">
             <Container>
                 <Navbar.Brand>
                     <Nav.Link href="#" as="span" style={{ border: 'none' }} >
@@ -65,18 +37,12 @@ const NavBar = ({ user, allProducts }) => {
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
-
-                        {/* <div className="search-form">
-                            <Search value={search} onChange={handleSearch} />
-                        </div> */}
-
-                        <Form>
+                        {/* <Form>
                             <Form.Control
                                 type="search"
                                 value={search}
                                 onChange={handleSearch} />
-                        </Form>
-
+                        </Form> */}
 
                         <Nav.Link href="#" as="span" style={{ border: 'none' }}>
                             <Link className="nav-link" style={{ textDecoration: 'none' }} to="/users">

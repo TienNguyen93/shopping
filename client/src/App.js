@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import {
   BrowserRouter as Router,
   Routes, Route, Link, Navigate, useMatch
@@ -23,21 +23,10 @@ import CartScreen from './screens/CartScreen';
 import ProductScreen from './screens/ProductScreen';
 
 
-
 const App = () => {
   const [products, setProducts] = useState([])
   const [allProducts, setAllProducts] = useState([])
   const [search, setSearch] = useState("")
-  const [categories, setCategories] = useState([
-    { id: 1, checked: false, label: 'Dumbbell' },
-    { id: 2, checked: false, label: 'Electronics' },
-    { id: 3, checked: false, label: 'Kitchen Dining' },
-    { id: 4, checked: false, label: 'Pots and Pans Set' },
-    { id: 5, checked: false, label: 'Tea Kettle' },
-  ])
-  const [message, setMessage] = useState(null)
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
   
 
@@ -59,30 +48,6 @@ const App = () => {
   }, [])
 
 
-  // // apply filter on data
-  // useEffect(() => {
-  //   let result = allProducts
-
-  //   // Search function
-  //   if (search) {
-  //     result = result.filter(product => product.title.toLowerCase().includes(search))
-  //   }
-
-  //   // Category filter
-  //   const categoryChecked = categories
-  //     .filter(category => category.checked)
-  //     .map(category => category.label.toLowerCase())
-
-  //   if (categoryChecked.length) {
-  //     result = result
-  //       .filter(item => categoryChecked.includes(item.category.toLowerCase()))
-  //   }
-
-  //   setProducts(result)
-
-  // }, [allProducts, search, categories])
-
-
 
   const handleLogout = async (event) => {
     event.preventDefault()
@@ -90,23 +55,6 @@ const App = () => {
     window.localStorage.removeItem('loggedNoteappUser')
     setUser(null)
   }
-
-
-  const handleSearch = (event) => {
-    console.log(event.target.value)
-    setSearch(event.target.value)
-  }
-
-
-  // const handleChecked = (id) => {
-  //   console.log('check is clicked')
-  //   const initialCat = categories
-  //   const changeCat = initialCat.map(category =>
-  //     category.id === id ? { ...category, checked: !category.checked } : category
-  //   )
-  //   setCategories(changeCat)
-  // }
-
 
 
   const Users = () => (
@@ -135,16 +83,24 @@ const App = () => {
   
   const match = useMatch('/products/:id')
   const product = match 
-    ? products.find(p => p.id === String(match.params.id))
+    ? allProducts.find(p => p.id === String(match.params.id))
     : null
+
+
+  // console.log('search app.js', search)
 
 
   return (
     <div className="container">
-      <NavBar user={user} allProducts={allProducts}/>
+      <NavBar 
+        user={user} 
+        allProducts={allProducts} 
+        search={search} 
+        setSearch={setSearch}
+      />
       
       <Routes>
-        <Route path="/" element={<HomeScreen />} />
+        <Route path="/" element={<HomeScreen search={search}/>} />
         <Route path="/cart" element={<CartScreen />} />
         <Route path="/products/:id" element={<Product product={product} />} />
         <Route path="/users" element={user ? <Users /> : <Navigate replace to="/login" />} />

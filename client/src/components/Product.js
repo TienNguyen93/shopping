@@ -14,13 +14,6 @@ const Product = ({product}) => {
             whiteSpace: 'normal',
             letterSpacing: 'normal',
             listStyleType: 'none'
-            // borderRadius: "10px",
-            // margin: "10px",
-            // display: "flex",
-            // flexDirection: "column",
-            // justifyContent: "space-evenly",
-            // alignItems: "center",
-            // minWidth: "20%",
         },
     
         image: {

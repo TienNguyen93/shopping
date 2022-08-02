@@ -1,16 +1,17 @@
 import React from "react"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import { Alert } from 'react-bootstrap'
 
 import FilterPanel from "../components/FilterPanel"
 import Products from "../components/Products"
+import NavBar from '../components/NavBar'
+
 
 import productService from '../services/service'
 
-const HomeScreen = () => {
+const HomeScreen = ({search}) => {
     const [products, setProducts] = useState([])
     const [allProducts, setAllProducts] = useState([])
-    const [search, setSearch] = useState("")
     const [categories, setCategories] = useState([
         { id: 1, checked: false, label: 'Dumbbell' },
         { id: 2, checked: false, label: 'Electronics' },
@@ -18,6 +19,7 @@ const HomeScreen = () => {
         { id: 4, checked: false, label: 'Pots and Pans Set' },
         { id: 5, checked: false, label: 'Tea Kettle' },
     ])
+
 
 
     useEffect(() => {
@@ -62,6 +64,8 @@ const HomeScreen = () => {
 
         setCategories(changeCat)
     }
+
+
 
     return (
         <div className="App">
