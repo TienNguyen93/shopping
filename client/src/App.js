@@ -28,7 +28,7 @@ const App = () => {
   const [allProducts, setAllProducts] = useState([])
   const [search, setSearch] = useState("")
   const [user, setUser] = useState(null)
-  
+
 
   useEffect(() => {
     productService
@@ -68,7 +68,7 @@ const App = () => {
   )
 
 
-  const Logout = ({handleLogout}) => (
+  const Logout = ({ handleLogout }) => (
     <button type="submit" onClick={handleLogout}>
       Logout
     </button>
@@ -80,9 +80,9 @@ const App = () => {
     setUser(user)
   }
 
-  
+
   const match = useMatch('/products/:id')
-  const product = match 
+  const product = match
     ? allProducts.find(p => p.id === String(match.params.id))
     : null
 
@@ -91,22 +91,26 @@ const App = () => {
 
 
   return (
-    <div className="container">
-      <NavBar 
-        user={user} 
-        allProducts={allProducts} 
-        search={search} 
+    <div>
+      <NavBar
+        user={user}
+        allProducts={allProducts}
+        search={search}
         setSearch={setSearch}
       />
-      
-      <Routes>
-        <Route path="/" element={<HomeScreen search={search}/>} />
-        <Route path="/cart" element={<CartScreen />} />
-        <Route path="/products/:id" element={<Product product={product} />} />
-        <Route path="/users" element={user ? <Users /> : <Navigate replace to="/login" />} />
-        <Route path="/login" element={<LoginForm handleSetUser={handleSetUser}/>} />
-        <Route path="/logout" element={<Logout handleLogout={handleLogout}/>} />
-      </Routes>
+
+      <div className="container-fluid">
+        <Routes>
+          <Route path="/" element={<HomeScreen search={search} />} />
+          <Route path="/cart" element={<CartScreen />} />
+          <Route path="/products/:id" element={<Product product={product} />} />
+          <Route path="/users" element={user ? <Users /> : <Navigate replace to="/login" />} />
+          <Route path="/login" element={<LoginForm handleSetUser={handleSetUser} />} />
+          <Route path="/logout" element={<Logout handleLogout={handleLogout} />} />
+        </Routes>
+      </div>
+
+
 
 
       {/* <div className="App">

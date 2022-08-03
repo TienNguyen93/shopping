@@ -9,7 +9,7 @@ import NavBar from '../components/NavBar'
 
 import productService from '../services/service'
 
-const HomeScreen = ({search}) => {
+const HomeScreen = ({ search }) => {
     const [products, setProducts] = useState([])
     const [allProducts, setAllProducts] = useState([])
     const [categories, setCategories] = useState([
@@ -65,14 +65,20 @@ const HomeScreen = ({search}) => {
         setCategories(changeCat)
     }
 
-
-
     return (
-        <div className="App">
-            
-            <div className="body">
-                <h1>Home screen here</h1>
-                <div style={{ display: 'flex', flex: '1' }}>
+        <div>
+            <div className="row">
+                <div className="col-lg-4">
+                    <FilterPanel categories={categories} onChange={handleChecked} />
+                </div>
+
+                <div className="col-lg-8">
+                    <section className="products">
+                        <Products products={products} />
+                    </section>
+                </div>
+            </div>
+            {/* <div style={{ display: 'flex', flex: '1' }}>
                     <div style={{ flexBasis: '200px' }}>
                         <h2>Category</h2>
                         <FilterPanel categories={categories} onChange={handleChecked} />
@@ -84,8 +90,8 @@ const HomeScreen = ({search}) => {
                             <Products products={products} />
                         </section>
                     </div>
-                </div>
-            </div>
+                </div> */}
+
 
             <div>
                 <br />

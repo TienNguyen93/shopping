@@ -2,13 +2,14 @@ import React from "react";
 
 const FilterPanel = ({categories, onChange}) => {
     return (
-        <div style={{paddingTop: '10px'}}>
+        <div style={{paddingTop: '5px'}}>
+            <h5 style={{fontWeight: 'bold'}}>Category</h5>
             {categories.map(category => 
-                <ul style={{listStyleType: 'none', margin: '5px'}} key={category.id}>
+                <ul style={{listStyleType: 'none', padding: '2px'}} key={category.id}>
                     <li>
                         <label>
                             <input 
-                                style={{transform: 'scale(1.5)', marginRight: '10px'}}
+                                style={{transform: 'scale(1.5)', margin: '5px', marginRight: '10px'}}
                                 type="checkbox" 
                                 checked={category.checked}
                                 onChange={() => onChange(category.id)}

@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom'
 import { Nav, Navbar, Container, Form, Button, InputGroup } from 'react-bootstrap'
 import { useState } from 'react'
-import {BsSearch} from 'react-icons/bs'
+import { BsSearch } from 'react-icons/bs'
 
-const NavBar = ({ user, search, setSearch }) => {
+const NavBar = ({ user, search, setSearch }) =>  {
 
     const handleSearch = (event) => {
         console.log(event.target.value)
@@ -15,10 +15,6 @@ const NavBar = ({ user, search, setSearch }) => {
         padding: 5
     }
 
-
-    // console.log('search navbar.js', search)
-
-    // variant="tabs"
 
     return (
         <Navbar collapseOnSelect expand="lg" className="header-container" >
@@ -70,13 +66,11 @@ const NavBar = ({ user, search, setSearch }) => {
                                 type="search"
                                 value={search}
                                 onChange={handleSearch} />
-                            <Button variant="outline-secondary" type="submit">
-                                <BsSearch color="black" size={18}/>
+                            <Button type="submit" variant="outline-success">
+                                <BsSearch color="black" size={18} />
                             </Button>
                         </InputGroup>
                     </Form>
-
-
                 </Navbar.Collapse>
             </Container>
         </Navbar >
@@ -85,6 +79,7 @@ const NavBar = ({ user, search, setSearch }) => {
 
 export default NavBar
 
-// variant="outline-success", 
-// variant="outline-secondary" 
+// variant="outline-success",
+// variant="outline-secondary"
 // id="button-addon2" color="red" size={12}
+// variant="outline-dark"
