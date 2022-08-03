@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Nav, Navbar, Container, Form, Button, InputGroup } from 'react-bootstrap'
 import { useState } from 'react'
-import { FaSistrix } from 'react-icons/fa'
+import {BsSearch} from 'react-icons/bs'
 
 const NavBar = ({ user, search, setSearch }) => {
 
@@ -21,7 +21,7 @@ const NavBar = ({ user, search, setSearch }) => {
     // variant="tabs"
 
     return (
-        <Navbar collapseOnSelect expand="lg" className="header-container">
+        <Navbar collapseOnSelect expand="lg" className="header-container" >
             <Container>
 
                 <Navbar.Brand>
@@ -65,17 +65,16 @@ const NavBar = ({ user, search, setSearch }) => {
                     </Nav>
 
                     <Form>
-                        <InputGroup className="mb-3">
+                        <InputGroup >
                             <Form.Control
                                 type="search"
                                 value={search}
                                 onChange={handleSearch} />
-                            <Button variant="outline-secondary" id="button-addon2">
-                                <FaSistrix color="red" size={12} />
+                            <Button variant="outline-secondary" type="submit">
+                                <BsSearch color="black" size={18}/>
                             </Button>
                         </InputGroup>
                     </Form>
-                    
 
 
                 </Navbar.Collapse>
@@ -86,4 +85,6 @@ const NavBar = ({ user, search, setSearch }) => {
 
 export default NavBar
 
-// variant="outline-success"
+// variant="outline-success", 
+// variant="outline-secondary" 
+// id="button-addon2" color="red" size={12}
