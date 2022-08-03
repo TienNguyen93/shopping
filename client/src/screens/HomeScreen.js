@@ -68,11 +68,13 @@ const HomeScreen = ({ search }) => {
     return (
         <div>
             <div className="row">
-                <div className="col-lg-4">
+                <h3 style={{fontWeight: 'bold'}}>Shopping Spree Best Seller</h3>
+                <div className="col col-lg-2">
+                    <h5 style={{fontWeight: 'bold'}}>Category</h5>
                     <FilterPanel categories={categories} onChange={handleChecked} />
                 </div>
 
-                <div className="col-lg-8">
+                <div className="col">
                     <section className="products">
                         <Products products={products} />
                     </section>
