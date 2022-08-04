@@ -3,7 +3,7 @@ import { Nav, Navbar, Container, Form, Button, InputGroup } from 'react-bootstra
 import { useState } from 'react'
 import { BsSearch } from 'react-icons/bs'
 
-const NavBar = ({ user, search, setSearch }) =>  {
+const NavBar = ({ user, search, setSearch }) => {
 
     const handleSearch = (event) => {
         console.log(event.target.value)
@@ -32,9 +32,21 @@ const NavBar = ({ user, search, setSearch }) =>  {
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="ms-auto">
 
+                        <Form style={{alignSelf: 'center'}}>
+                            <InputGroup>
+                                <Form.Control
+                                    type="search"
+                                    value={search}
+                                    onChange={handleSearch} />
+                                <Button type="submit" variant="outline-success">
+                                    <BsSearch color="black" size={18} />
+                                </Button>
+                            </InputGroup>
+                        </Form>
+
                         <Nav.Link href="#" as="span" style={{ border: 'none' }}>
-                            <Link className="nav-link" style={{ textDecoration: 'none' }} to="/users">
-                                Users
+                            <Link className="nav-link" style={{ textDecoration: 'none' }} to="/profile">
+                                Profile
                             </Link>
                         </Nav.Link>
 
@@ -43,6 +55,7 @@ const NavBar = ({ user, search, setSearch }) =>  {
                                 Cart
                             </Link>
                         </Nav.Link>
+
 
                         <Nav.Link href="#" as="span" style={{ border: 'none' }}>
                             {user
@@ -60,7 +73,7 @@ const NavBar = ({ user, search, setSearch }) =>  {
                         </Nav.Link>
                     </Nav>
 
-                    <Form>
+                    {/* <Form>
                         <InputGroup >
                             <Form.Control
                                 type="search"
@@ -70,7 +83,7 @@ const NavBar = ({ user, search, setSearch }) =>  {
                                 <BsSearch color="black" size={18} />
                             </Button>
                         </InputGroup>
-                    </Form>
+                    </Form> */}
                 </Navbar.Collapse>
             </Container>
         </Navbar >
@@ -78,8 +91,3 @@ const NavBar = ({ user, search, setSearch }) =>  {
 }
 
 export default NavBar
-
-// variant="outline-success",
-// variant="outline-secondary"
-// id="button-addon2" color="red" size={12}
-// variant="outline-dark"

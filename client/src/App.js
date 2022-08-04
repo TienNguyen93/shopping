@@ -57,12 +57,12 @@ const App = () => {
   }
 
 
-  const Users = () => (
+  const Profile = () => (
     <div>
-      <h2>TKTL notes app</h2>
+      <h2>{user.name}</h2>
       <ul>
-        <li>Matti Luukkainen</li>
-        <li>Juha Tauriainen</li>
+        <li>Fake info1</li>
+        <li>Fake info2</li>
       </ul>
     </div>
   )
@@ -104,7 +104,7 @@ const App = () => {
           <Route path="/" element={<HomeScreen search={search} />} />
           <Route path="/cart" element={<CartScreen />} />
           <Route path="/products/:id" element={<Product product={product} />} />
-          <Route path="/users" element={user ? <Users /> : <Navigate replace to="/login" />} />
+          <Route path="/profile" element={user ? <Profile /> : <Navigate replace to="/login" />} />
           <Route path="/login" element={<LoginForm handleSetUser={handleSetUser} />} />
           <Route path="/logout" element={<Logout handleLogout={handleLogout} />} />
         </Routes>

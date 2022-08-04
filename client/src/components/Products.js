@@ -5,7 +5,7 @@ import { FaStar } from 'react-icons/fa'
 const Products = ({ products }) => {
     const style = {
         product: {
-            verticalAlign: 'top',
+            // verticalAlign: 'top',
             textAlign: 'left',
             overFlow: 'hidden',
             minHeight: '100%',
@@ -21,12 +21,14 @@ const Products = ({ products }) => {
             alignSelf: 'center'
         }
     }
+
+    
     return (
         <>
         {products.map(product =>
-                <div key={product.id} style={style.product}>
+                <div key={product.id} style={{alignSelf: 'center'}}>
                     <Link to={`/products/${product.id}`}>
-                            <div style={{display: "inline-table"}}>
+                        <div style={{display: "inline-table"}}>
                             <div style={{ textAlign: 'center' }}>
                                 <img style={style.image} src={product.image} alt="" />
                             </div>

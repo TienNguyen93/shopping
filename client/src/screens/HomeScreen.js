@@ -68,9 +68,9 @@ const HomeScreen = ({ search }) => {
     return (
         <div>
             <div className="row">
-                <h3 style={{fontWeight: 'bold'}}>Shopping Spree Best Seller</h3>
+                <h3 style={{ fontWeight: 'bold' }}>Best Sellers</h3>
                 <div className="col col-lg-2">
-                    <h5 style={{fontWeight: 'bold'}}>Category</h5>
+                    <h5 style={{ fontWeight: 'bold' }}>Category</h5>
                     <FilterPanel categories={categories} onChange={handleChecked} />
                 </div>
 
@@ -80,19 +80,6 @@ const HomeScreen = ({ search }) => {
                     </section>
                 </div>
             </div>
-            {/* <div style={{ display: 'flex', flex: '1' }}>
-                    <div style={{ flexBasis: '200px' }}>
-                        <h2>Category</h2>
-                        <FilterPanel categories={categories} onChange={handleChecked} />
-                    </div>
-
-                    <div style={{ flex: '1' }}>
-                        <h2>Products</h2>
-                        <section className="products">
-                            <Products products={products} />
-                        </section>
-                    </div>
-                </div> */}
 
 
             <div>
