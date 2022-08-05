@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Nav, Navbar, Container, Form, Button, InputGroup } from 'react-bootstrap'
 import { useState } from 'react'
-import { BsSearch } from 'react-icons/bs'
+import { BsSearch, BsCart } from 'react-icons/bs'
 
 const NavBar = ({ user, search, setSearch }) => {
 
@@ -10,29 +10,29 @@ const NavBar = ({ user, search, setSearch }) => {
         setSearch(event.target.value)
     }
 
-
-    const padding = {
-        padding: 5
+    const navLinkStyle = {
+        padding: '0.5rem 1rem',
+        color: 'red',
+        textDecoration: 'none'
     }
 
 
     return (
         <Navbar collapseOnSelect expand="lg" className="header-container" >
-            <Container>
+            <Container fluid>
 
                 <Navbar.Brand>
-                    <Nav.Link href="#" as="span" style={{ border: 'none' }} >
-                        <Link className="nav-link" style={{ textDecoration: 'none' }} to="/">
-                            Shopping Spree
-                        </Link>
-                    </Nav.Link>
+                    <Link className="nav-link" style={{ display: 'inline' }} to="/">
+                        Shopping Spree
+                    </Link>
+
                 </Navbar.Brand>
 
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="ms-auto">
 
-                        <Form style={{alignSelf: 'center'}}>
+                        <Form style={{ alignSelf: 'center' }}>
                             <InputGroup>
                                 <Form.Control
                                     type="search"
@@ -44,46 +44,29 @@ const NavBar = ({ user, search, setSearch }) => {
                             </InputGroup>
                         </Form>
 
-                        <Nav.Link href="#" as="span" style={{ border: 'none' }}>
-                            <Link className="nav-link" style={{ textDecoration: 'none' }} to="/profile">
-                                Profile
-                            </Link>
-                        </Nav.Link>
 
                         <Nav.Link href='#' as="span" style={{ border: 'none' }}>
-                            <Link className="nav-link" style={{ textDecoration: 'none' }} to="/cart">
-                                Cart
+                            <Link className="nav-link" style={{ display: 'inline' }} to="/cart">
+                                <span>
+                                    <BsCart size={30} />
+                                </span>
                             </Link>
                         </Nav.Link>
 
 
                         <Nav.Link href="#" as="span" style={{ border: 'none' }}>
                             {user
-                                ? <em style={padding}>{user.name} logged in</em>
-                                : <Link className="nav-link" style={{ textDecoration: 'none' }} to="/login">
+                                ?
+                                <Link className="nav-link" style={{ display: 'inline' }} to="/profile">
+                                    {user.name} logged in
+                                </Link>
+                                : <Link className="nav-link" style={{ display: 'inline' }} to="/login">
                                     Login
                                 </Link>
                             }
                         </Nav.Link>
-
-                        <Nav.Link href="#" as="span" style={{ border: 'none' }}>
-                            <Link className="nav-link" style={{ textDecoration: 'none' }} to="/logout">
-                                Logout
-                            </Link>
-                        </Nav.Link>
                     </Nav>
 
-                    {/* <Form>
-                        <InputGroup >
-                            <Form.Control
-                                type="search"
-                                value={search}
-                                onChange={handleSearch} />
-                            <Button type="submit" variant="outline-success">
-                                <BsSearch color="black" size={18} />
-                            </Button>
-                        </InputGroup>
-                    </Form> */}
                 </Navbar.Collapse>
             </Container>
         </Navbar >

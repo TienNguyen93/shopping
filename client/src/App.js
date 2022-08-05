@@ -20,7 +20,7 @@ import NavBar from './components/NavBar';
 
 import HomeScreen from './screens/HomeScreen';
 import CartScreen from './screens/CartScreen';
-import ProductScreen from './screens/ProductScreen';
+import UserScreen from './screens/UserScreen'
 
 
 const App = () => {
@@ -68,12 +68,6 @@ const App = () => {
   )
 
 
-  const Logout = ({ handleLogout }) => (
-    <button type="submit" onClick={handleLogout}>
-      Logout
-    </button>
-  )
-
 
   const handleSetUser = (user) => {
     console.log('handle set user')
@@ -87,8 +81,7 @@ const App = () => {
     : null
 
 
-  // console.log('search app.js', search)
-
+  // console.log('product app.js', product)
 
   return (
     <div>
@@ -104,9 +97,8 @@ const App = () => {
           <Route path="/" element={<HomeScreen search={search} />} />
           <Route path="/cart" element={<CartScreen />} />
           <Route path="/products/:id" element={<Product product={product} />} />
-          <Route path="/profile" element={user ? <Profile /> : <Navigate replace to="/login" />} />
+          <Route path="/profile" element={user ? <UserScreen handleLogout={handleLogout}/> : <Navigate replace to="/login"/> }/>
           <Route path="/login" element={<LoginForm handleSetUser={handleSetUser} />} />
-          <Route path="/logout" element={<Logout handleLogout={handleLogout} />} />
         </Routes>
       </div>
 
