@@ -81,7 +81,7 @@ const App = () => {
     : null
 
 
-  // console.log('product app.js', product)
+  // console.log('product app.js', typeof product)
 
   return (
     <div>
