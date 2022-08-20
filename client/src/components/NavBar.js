@@ -3,11 +3,21 @@ import { Nav, Navbar, Container, Form, Button, InputGroup } from 'react-bootstra
 import { useState } from 'react'
 import { BsSearch, BsCart } from 'react-icons/bs'
 
-const NavBar = ({ user, search, setSearch }) => {
+const NavBar = ({ user, search, setSearch, allProducts, setProducts }) => {
 
     const handleSearch = (event) => {
-        console.log(event.target.value)
         setSearch(event.target.value)
+        if (search !== "") {
+            const newList = allProducts.filter(prod => {
+                return Object.values(prod)
+                .join(" ")
+                .toLowerCase()
+                .includes(search.toLowerCase())
+            })
+            setProducts(newList)
+        } else {
+            setProducts(allProducts)
+        }
     }
 
     const navLinkStyle = {

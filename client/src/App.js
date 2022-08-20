@@ -80,8 +80,8 @@ const App = () => {
     ? allProducts.find(p => p.id === String(match.params.id))
     : null
 
-
-  // console.log('product app.js', typeof product)
+  console.log('products', products.length, products)
+  console.log('search len', search.length)
 
   return (
     <div>
@@ -90,11 +90,13 @@ const App = () => {
         allProducts={allProducts}
         search={search}
         setSearch={setSearch}
+        setProducts={setProducts}
       />
 
       <div className="container-fluid">
         <Routes>
-          <Route path="/" element={<HomeScreen search={search} />} />
+          <Route path="/" element={<HomeScreen 
+            search={search} allProducts={allProducts} products={products} setProducts={setProducts}/>} />
           <Route path="/cart" element={<CartScreen />} />
           <Route path="/products/:id" element={<Product product={product} />} />
           <Route path="/profile" element={user ? <UserScreen handleLogout={handleLogout}/> : <Navigate replace to="/login"/> }/>
