@@ -80,8 +80,8 @@ const App = () => {
     ? allProducts.find(p => p.id === String(match.params.id))
     : null
 
-  console.log('products', products.length, products)
-  console.log('search len', search.length)
+  // console.log('products', products.length, products)
+  // console.log('search len', search.length)
 
   return (
     <div>

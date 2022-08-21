@@ -35,58 +35,15 @@ const Product = ({ product }) => {
         }
     }
 
-
-    // const quantity = {
-    //     unit: [...Array(10).keys()]
-    // }
-
     const unit = [...Array(10).keys()]
 
-    const [units, setUnits] = useState(unit[0] + 1)
+    // const [units, setUnits] = useState(unit[0] + 1)
 
-    console.log('quant', units)
+    // console.log('quant', units)
 
     return (
-        // <div className="row" style={{ padding: '20px' }}>
-        //     <div className="col">
-        //         <Card.Img src={product?.image} alt="" />
-        //     </div>
-
-        //     <div className="col-md-auto">
-        //         <Card.Body>
-        //             <Card.Title>{product?.title}</Card.Title>
-        //             <Card.Text>
-        //                 {[...Array(5)].map((star, index) => {
-        //                     return (
-        //                         <FaStar key={index} style={{ marginRight: '5px' }} color="red" size={12} />
-        //                     )
-        //                 })}
-        //             </Card.Text>
-        //             <Card.Text style={{ fontSize: 'larger', fontWeight: 'bold' }}>
-        //                 ${product?.price}
-        //             </Card.Text>
-        //         </Card.Body>
-        //     </div>
-
-        //     <div className="col-xs-lg">
-        //         <Card.Text>
-        //             Status: In Stock
-        //         </Card.Text>
-        //         <div className="row">
-        //             <Button style={{ borderRadius: '15px' }}>
-        //                 Qty:
-        //             </Button>
-        //             <Button style={style.button}>
-        //                 Add to Cart
-        //             </Button>
-        //         </div>
-        //     </div>
-        // </div>
-
-
-        <Container style={{ padding: '20px'}}>
+        <Container style={{ padding: '20px' }}>
             <Row style={{ alignItems: 'flex-start', gap: '1rem' }}>
-                {/* <Col sm={8}> */}
                 <Col>
                     <Image fluid src={product?.image} />
                 </Col>
@@ -107,13 +64,26 @@ const Product = ({ product }) => {
                 </Col>
 
                 <Col sm={4}>
-                    <Card style={{overflow: 'inherit'}}>
+                    <Card style={{ overflow: 'inherit' }}>
                         <Card.Body>
                             <Card.Text>
                                 Status: In Stock
                             </Card.Text>
 
-                            <Dropdown style={{ marginBottom: '1rem' }}>
+                            <div style={{paddingBottom: '1rem'}}>
+                                <Button style={{...style.button, backgroundColor: 'red'}}>
+                                    <label style={{ paddingRight: '5px' }}>Qty:</label>
+                                    <select>
+                                        {unit.map(u => (
+                                            <option key={u}>{u + 1}</option>
+                                        ))}
+                                    </select>
+                                </Button>
+
+                            </div>
+
+
+                            {/* <Dropdown style={{ marginBottom: '1rem' }}>
                                 <Dropdown.Toggle variant="success" id="dropdown-basic" style={{ borderRadius: '15px' }}>
                                     Qty: {units}
                                 </Dropdown.Toggle>
@@ -123,7 +93,7 @@ const Product = ({ product }) => {
                                         <Dropdown.Item key={data}>{data + 1}</Dropdown.Item>
                                     ))}
                                 </Dropdown.Menu>
-                            </Dropdown>
+                            </Dropdown> */}
 
                             <div>
                                 <Button style={style.button}>

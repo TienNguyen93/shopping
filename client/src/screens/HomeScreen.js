@@ -43,31 +43,35 @@ const HomeScreen = ({ search, allProducts, products, setProducts }) => {
 
     const handleChecked = (id) => {
         console.log('check is clicked')
-        const initialCat = categories
-        const changeCat = initialCat.map(category =>
-            category.id === id ? { ...category, checked: !category.checked } : category
-        )
+        const changeCat = categories
+            .map(category => category.id === id
+                ? { ...category, checked: !category.checked }
+                : category)
         setCategories(changeCat)
-        console.log(changeCat)
+
+        const catChecked = changeCat
+            .filter(category => category.checked)
+            .map(category => category.label.toLowerCase())
+        console.log(catChecked, catChecked.length)
+
+        if (catChecked) {
+            const newList = allProducts.filter(product => 
+                catChecked.includes(product.category.toLowerCase()))
+            console.log('new', newList)
+            setProducts(newList)
+        } else {
+            setProducts(allProducts)
+        }
     }
 
 
-    // const boxFilterItems = (allProducts) => {
-    //     const categoryChecked = categories
+    // const boxFilter = () => {
+    //     const catChecked = categories
     //         .filter(category => category.checked)
     //         .map(category => category.label.toLowerCase())
-
-    //     if (categoryChecked.length) {
-    //         const newList = allProducts.filter(item => 
-    //             categoryChecked.includes(item.category.toLowerCase()))
-    //         setProducts(newList)
-    //     } else {
-    //         setProducts(allProducts)
-    //     }
+    //     console.log(catChecked, catChecked.length)
     // }
 
-
-    // const filteredItems = boxFilterItems(products)
 
     return (
         <div>
@@ -81,6 +85,7 @@ const HomeScreen = ({ search, allProducts, products, setProducts }) => {
                 <div className="col">
                     <section className="products">
                         <Products products={search.length < 1 ? allProducts : products} />
+                        {/* <Products products={handleChecked ? products : allProducts} /> */}
                     </section>
                 </div>
             </div>
