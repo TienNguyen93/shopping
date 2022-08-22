@@ -3,9 +3,6 @@ import { FaStar } from 'react-icons/fa'
 import { Card, Image, Button, Container, Row, Col, Dropdown, ListGroup, DropdownButton }
     from 'react-bootstrap'
 
-import { useState } from "react";
-
-
 const Product = ({ product }) => {
     const style = {
         product: {
@@ -32,14 +29,17 @@ const Product = ({ product }) => {
             paddingRight: '50px',
             paddingLeft: '50px',
             border: 'none'
+        },
+
+        dropdown: {
+            backgroundColor: 'beige',
+            borderRadius: '15px',
+            border: 'none',
+            color: 'black'
         }
     }
 
     const unit = [...Array(10).keys()]
-
-    // const [units, setUnits] = useState(unit[0] + 1)
-
-    // console.log('quant', units)
 
     return (
         <Container style={{ padding: '20px' }}>
@@ -71,35 +71,22 @@ const Product = ({ product }) => {
                             </Card.Text>
 
                             <div style={{paddingBottom: '1rem'}}>
-                                <Button style={{...style.button, backgroundColor: 'red'}}>
-                                    <label style={{ paddingRight: '5px' }}>Qty:</label>
-                                    <select>
+                                <Button style={style.dropdown}>
+                                    <label>Qty:</label>
+                                    <select style={{border: 'none'}}>
                                         {unit.map(u => (
-                                            <option key={u}>{u + 1}</option>
+                                            <option key={u} value={u}>{u + 1}</option>
                                         ))}
                                     </select>
                                 </Button>
-
                             </div>
-
-
-                            {/* <Dropdown style={{ marginBottom: '1rem' }}>
-                                <Dropdown.Toggle variant="success" id="dropdown-basic" style={{ borderRadius: '15px' }}>
-                                    Qty: {units}
-                                </Dropdown.Toggle>
-                                
-                                <Dropdown.Menu style={{maxHeight: '200px', overflowY: 'auto'}}>
-                                {unit.map(data => (
-                                        <Dropdown.Item key={data}>{data + 1}</Dropdown.Item>
-                                    ))}
-                                </Dropdown.Menu>
-                            </Dropdown> */}
 
                             <div>
                                 <Button style={style.button}>
                                     Add to Cart
                                 </Button>
                             </div>
+
                         </Card.Body>
                     </Card>
                 </Col>

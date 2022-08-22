@@ -80,8 +80,38 @@
     color: black
 }
 
-.nav-link:hover{
+.nav-link:hover {
     color: green;
     border: 0.9px solid;
     border-radius: 0.5rem;
 }
+
+
+
+/* .dropdownBtn:hover {
+    background-color: beige;
+    padding-bottom: 1rem;
+    cursor: pointer;
+}
+
+
+.dropdownBtn select {
+    background: none;
+    border: none;
+    color: black;
+    overflow: hidden;
+    opacity: .5;
+}
+
+
+.dropdownBtn select:hover {
+    opacity: 1;
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+
+.dropdownBtn select:focus {
+    box-shadow: none;
+    outline: none;
+} */

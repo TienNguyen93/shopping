@@ -97,7 +97,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<HomeScreen 
             search={search} allProducts={allProducts} products={products} setProducts={setProducts}/>} />
-          <Route path="/cart" element={<CartScreen />} />
+          <Route path="/cart" element={<CartScreen product={product}/>} />
           <Route path="/products/:id" element={<Product product={product} />} />
           <Route path="/profile" element={user ? <UserScreen handleLogout={handleLogout}/> : <Navigate replace to="/login"/> }/>
           <Route path="/login" element={<LoginForm handleSetUser={handleSetUser} />} />
