@@ -1,6 +1,6 @@
 import React from "react";
 import { FaStar } from 'react-icons/fa'
-import { Card, Image, Button, Container, Row, Col, Dropdown, ListGroup, DropdownButton }
+import { Card, Image, Button, Container, Row, Col }
     from 'react-bootstrap'
 
 const Product = ({ product }) => {
