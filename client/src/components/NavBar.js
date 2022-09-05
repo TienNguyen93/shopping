@@ -3,7 +3,11 @@ import { Nav, Navbar, Container, Form, Button, InputGroup } from 'react-bootstra
 import { useState } from 'react'
 import { BsSearch, BsCart } from 'react-icons/bs'
 
+import { useSelector } from 'react-redux'
+
 const NavBar = ({ user, search, setSearch, allProducts, setProducts }) => {
+    const state = useSelector(state => state.handleCart)
+
 
     const handleSearch = (event) => {
         setSearch(event.target.value)
@@ -59,6 +63,7 @@ const NavBar = ({ user, search, setSearch, allProducts, setProducts }) => {
                             <Link className="nav-link" style={{ display: 'inline' }} to="/cart">
                                 <span>
                                     <BsCart size={30} />
+                                    Cart ({state.length})
                                 </span>
                             </Link>
                         </Nav.Link>

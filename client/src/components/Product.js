@@ -3,7 +3,16 @@ import { FaStar } from 'react-icons/fa'
 import { Card, Image, Button, Container, Row, Col }
     from 'react-bootstrap'
 
+import { useDispatch } from 'react-redux';
+import { addCart } from '../redux/actions'
+
 const Product = ({ product }) => {
+    const disptach = useDispatch()
+    const addProduct = product => {
+      disptach(addCart(product))
+    }
+
+
     const style = {
         product: {
             verticalAlign: 'top',
@@ -70,10 +79,10 @@ const Product = ({ product }) => {
                                 Status: In Stock
                             </Card.Text>
 
-                            <div style={{paddingBottom: '1rem'}}>
+                            <div style={{ paddingBottom: '1rem' }}>
                                 <Button style={style.dropdown}>
                                     <label>Qty:</label>
-                                    <select style={{border: 'none'}}>
+                                    <select style={{ border: 'none' }}>
                                         {unit.map(u => (
                                             <option key={u} value={u}>{u + 1}</option>
                                         ))}
@@ -82,7 +91,7 @@ const Product = ({ product }) => {
                             </div>
 
                             <div>
-                                <Button style={style.button}>
+                                <Button style={style.button} onClick={() => addProduct(product)}>
                                     Add to Cart
                                 </Button>
                             </div>

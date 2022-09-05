@@ -3,6 +3,8 @@ import { FaTrash } from 'react-icons/fa'
 import { Container, Row, Col, Button, Card, Image }
     from 'react-bootstrap'
 
+import { useSelector } from 'react-redux'
+
 const CartScreen = ({ product }) => {
     const style = {
         button: {
@@ -20,6 +22,8 @@ const CartScreen = ({ product }) => {
             color: 'black'
         }
     }
+    
+    
 
     const unit = [...Array(10).keys()]
 

@@ -23,11 +23,21 @@ import CartScreen from './screens/CartScreen';
 import UserScreen from './screens/UserScreen'
 
 
+// import { useDispatch } from 'react-redux';
+// import { addCart } from './redux/actions'
+
+
 const App = () => {
   const [products, setProducts] = useState([])
   const [allProducts, setAllProducts] = useState([])
   const [search, setSearch] = useState("")
   const [user, setUser] = useState(null)
+
+
+  // const disptach = useDispatch()
+  // const addProduct = product => {
+  //   disptach(addCart(product))
+  // }
 
 
   useEffect(() => {
