@@ -1,17 +1,17 @@
 import React from 'react'
-import {Button} from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 
 const UserScreen = ({ handleLogout }) => {
-    return (
-        <div>
-            <h4>User Screen here</h4>
-            <Button type="submit" onClick={handleLogout}>
+  return (
+    <div>
+      <h4>User Screen here</h4>
+      <Button type="submit" onClick={handleLogout}>
                 Logout
-            </Button>
+      </Button>
 
-        </div>
-        
-    )
+    </div>
+
+  )
 }
 
 export default UserScreen

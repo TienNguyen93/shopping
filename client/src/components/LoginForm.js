@@ -1,19 +1,19 @@
-import React from "react";
-import PropTypes from 'prop-types'
+import React from 'react'
+// import PropTypes from 'prop-types'
 import { useNavigate } from 'react-router-dom'
-import { useState, useEffect } from 'react'
-import { Table, Form, Button, Alert } from 'react-bootstrap'
+import { useState } from 'react'
+import { Form, Button } from 'react-bootstrap'
 
 import loginService from '../services/login'
-import Notification from "./Notification";
+// import Notification from "./Notification";
 
 
 const LoginForm = ({ handleSetUser }) => {
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [message, setMessage] = useState(null)
-  const [user, setUser] = useState(null)
+  // const [message, setMessage] = useState(null)
+  // const [user, setUser] = useState(null)
 
 
   const navigate = useNavigate()
@@ -36,10 +36,11 @@ const LoginForm = ({ handleSetUser }) => {
       setPassword('')
       navigate('/')
     } catch (exception) {
-      setMessage('wrong credentials')
-      setTimeout(() => {
-        setMessage(null)
-      }, 5000)
+      console.log(exception)
+      // setMessage('wrong credentials')
+      // setTimeout(() => {
+      //   setMessage(null)
+      // }, 5000)
     }
   }
 
